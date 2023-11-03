@@ -13,7 +13,7 @@ const App = () => {
     status: 'Planned',
   });
   const [sortOption, setSortOption] = useState('time');
-  const [sortOrder, setSortOrder] = useState('asc');
+  const [sortOrder, setSortOrder] = useState('desc');
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import Task from './Task';
 
 const App = () => {
   const [tasks, setTasks] = useState(() => {
-    // Get the tasks from local storage when the component mounts
     const savedTasks = localStorage.getItem('tasks');
     return savedTasks ? JSON.parse(savedTasks) : [];
   });
@@ -12,9 +12,11 @@ const App = () => {
     text: '',
     status: 'Planned',
   });
+  const [sortOption, setSortOption] = useState('time');
+  const [sortOrder, setSortOrder] = useState('asc');
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
-    // Save the tasks to local storage whenever tasks change
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
 
@@ -27,6 +29,10 @@ const App = () => {
           day: '2-digit',
           month: '2-digit',
           year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false
         }).replace(/\//g, '.'),
       };
       setTasks([newTask, ...tasks]);
@@ -54,24 +60,7 @@ const App = () => {
       ...prevTask,
       [name]: value,
     }));
-  };
-
-  const getBorderStyle = (status) => {
-    const styles = {
-      Planned: { borderColor: 'red', borderStyle: 'dotted' },
-      Ongoing: { borderColor: 'orange', borderStyle: 'dashed' },
-      Done: {
-        borderColor: 'green',
-        borderStyle: 'solid',
-        boxShadow: '0 0 50px 2px rgba(0, 255, 0, 0.2)'
-      },
-    };
-  
-    return {
-      borderWidth: '4px',
-      ...styles[status] || {},
-    };
-  };  
+  }; 
 
   const updateTaskStatus = (taskId, status) => {
     const now = new Date();
@@ -90,6 +79,35 @@ const App = () => {
   };
 
   const statuses = ['Planned', 'Ongoing', 'Done'];
+
+  const sortTasks = (a, b) => {
+    const parseDateWithFallback = (task) => {
+      const updated = task.updateddatestamp && task.updatedtimestamp
+        ? new Date(`${task.updateddatestamp} ${task.updatedtimestamp}`).getTime()
+        : null;
+      const created = new Date(task.datestamp).getTime();
+      return updated || created;
+    };
+  
+    if (sortOption === 'time') {
+
+      const timeA = new Date(a.datestamp).getTime();
+      const timeB = new Date(b.datestamp).getTime();
+      return sortOrder === 'asc' ? timeA - timeB : timeB - timeA;
+    } else if (sortOption === 'status') {
+      return sortOrder === 'asc' ? a.status.localeCompare(b.status) : b.status.localeCompare(a.status);
+    } else if (sortOption === 'updated') {
+      const dateA = parseDateWithFallback(a);
+      const dateB = parseDateWithFallback(b);
+      return sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
+    }
+  };  
+
+  const filterTasks = (task) => {
+    return task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            task.text.toLowerCase().includes(searchQuery.toLowerCase());
+  };
+  
 
   return (
     <div>
@@ -114,41 +132,36 @@ const App = () => {
         />
       </form>
       <div>
-        {tasks.map((taskObj) => (
-          <div 
-            className='task' 
+        <input
+          type="text"
+          placeholder="Search tasks..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <select
+          value={sortOption}
+          onChange={(e) => setSortOption(e.target.value)}
+        >
+          <option value="time">Sort by creation time</option>
+          <option value="status">Sort by status</option>
+          <option value="updated">Sort by time updated</option>
+        </select>
+        <button onClick={() => setSortOrder('asc')}>Asc</button>
+        <button onClick={() => setSortOrder('desc')}>Desc</button>
+      </div>
+      <div>
+      {tasks
+        .filter(filterTasks)
+        .sort(sortTasks)
+        .map((taskObj) => (
+          <Task
             key={taskObj.id}
-            style={{ ...getBorderStyle(taskObj.status) }}
-          >
-            <div className='fr'>
-              <div>
-                <div className='fr'><h3>{taskObj.title}</h3></div>
-                <p>{taskObj.text}</p>
-              </div>
-              <div className='fc'>
-                <h3>{taskObj.datestamp}</h3>
-                <h5>Marked as<br />{taskObj.status}<br />{taskObj.updateddatestamp}<br />{taskObj.updatedtimestamp}</h5>
-              </div>
-            </div>
-            <div className='fr'>
-              <div className='status-container'>
-                {statuses.map((status) => (
-                  <label key={status}>
-                    <input
-                      type="radio"
-                      name={`status-${taskObj.id}`}
-                      value={status}
-                      checked={taskObj.status === status}
-                      onChange={() => updateTaskStatus(taskObj.id, status)}
-                    />
-                    {status}
-                  </label>
-                ))}
-              </div>
-              <button onClick={() => deleteTask(taskObj.id)}>Delete</button>
-            </div>
-          </div>
-        ))}
+            taskObj={taskObj}
+            updateTaskStatus={updateTaskStatus}
+            deleteTask={deleteTask}
+            statuses={statuses}
+          />
+      ))}
       </div>
     </div>
   );

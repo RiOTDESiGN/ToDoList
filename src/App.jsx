@@ -1,20 +1,17 @@
-import { signal } from "@preact/signals-react"
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Task from './Task';
 
 const LOCAL_STORAGE_KEY = "tasks";
 
+const loadSavedTasks = () => {
+  const savedTasks = localStorage.getItem(LOCAL_STORAGE_KEY);
+  return savedTasks ? JSON.parse(savedTasks) : [];
+};
+
 const App = () => {
-  const [tasks, setTasks] = useState(() => {
-    const savedTasks = localStorage.getItem(LOCAL_STORAGE_KEY);
-    return savedTasks ? JSON.parse(savedTasks) : [];
-  });
-  const [task, setTask] = useState({
-    title: '',
-    text: '',
-    status: 'Planned',
-  });
+  const [tasks, setTasks] = useState(loadSavedTasks);
+  const [task, setTask] = useState({ title: '', text: '', status: 'Planned' });
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOption, setSortOption] = useState('time');
   const [sortOrder, setSortOrder] = useState('desc');
@@ -37,24 +34,20 @@ const App = () => {
 
   const addTask = () => {
     if (task.title.trim() && task.text.trim()) {
-      const newTask = {
-        ...task,
+      setTasks(prevTasks => [{
         id: uuidv4(),
+        title: task.title.trim(),
+        text: task.text.trim(),
+        status: 'Planned',
         dateCreated: generateTimestamp(),
         dateUpdated: generateTimestamp(),
-      };
-      setTasks([newTask, ...tasks]);
-      setTask({
-        title: '',
-        text: '',
-        status: 'Planned',
-      });
+      }, ...prevTasks]);
+      setTask({ title: '', text: '', status: 'Planned' });
     }
   };
 
   const deleteTask = (taskId) => {
-    const newTasks = tasks.filter(task => task.id !== taskId);
-    setTasks(newTasks);
+    setTasks(tasks.filter(t => t.id !== taskId));
   };
 
   const handleSubmit = (e) => {
@@ -64,42 +57,27 @@ const App = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setTask((prevTask) => ({
-      ...prevTask,
-      [name]: value,
-    }));
+    setTask(prev => ({ ...prev, [name]: value }));
   }; 
 
   const updateTaskStatus = (taskId, status) => {
-    const updatedTasks = tasks.map(task => {
-      if (task.id === taskId) {
-        return {
-          ...task,
-          status: status,
-          dateUpdated: generateTimestamp(),
-        };
-      }
-      return task;
-    });
-    setTasks(updatedTasks);
+    setTasks(prevTasks => prevTasks.map(t => t.id === taskId ? { ...t, status, dateUpdated: generateTimestamp() } : t));
   };
 
   const statuses = ['Planned', 'Ongoing', 'Done'];
 
+  const getTime = dateString => new Date(dateString).getTime();
+
   const sortTasks = (a, b) => {
-    const getTime = (dateString) => new Date(dateString).getTime();
-    
+    let comparison = 0;
     if (sortOption === 'time') {
-      const timeA = getTime(a.dateCreated);
-      const timeB = getTime(b.dateCreated);
-      return sortOrder === 'asc' ? timeA - timeB : timeB - timeA;
+      comparison = getTime(a.dateCreated) - getTime(b.dateCreated);
     } else if (sortOption === 'status') {
-      return sortOrder === 'asc' ? a.status.localeCompare(b.status) : b.status.localeCompare(a.status);
+      comparison = a.status.localeCompare(b.status);
     } else if (sortOption === 'updated') {
-      const dateA = getTime(a.dateUpdated);
-      const dateB = getTime(b.dateUpdated);
-      return sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
+      comparison = getTime(a.dateUpdated) - getTime(b.dateUpdated);
     }
+    return sortOrder === 'asc' ? comparison : -comparison;
   };
 
   const filterTasks = (task) => {

@@ -14,17 +14,19 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, statuses }) => {
   
   return (
     <div className='task' style={getBorderStyle(taskObj.status)}>
-      <div className='fr'>
-        <div>
-          <div className='fr'><h3>{taskObj.title}</h3></div>
+
+      <div className='taskContent'>
+        <div className='taskText'>
+          <h3>{taskObj.title}</h3>
           <p>{taskObj.text}</p>
         </div>
-        <div className='fc'>
-          <h3>{taskObj.datestamp}</h3>
-          <h5>Marked as<br />{taskObj.status}<br />{taskObj.updateddatestamp}<br />{taskObj.updatedtimestamp}</h5>
+        <div className='taskDates'>
+          <h3>{taskObj.dateCreated}</h3>
+          <h5>Marked as<br />{taskObj.status}<br />{taskObj.dateUpdated}</h5>
         </div>
       </div>
-      <div className='fr'>
+
+      <div className='taskStatusbar'>
         <div className='status-container'>
           {statuses.map((status) => (
             <label key={status}>
@@ -41,6 +43,7 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, statuses }) => {
         </div>
         <button onClick={() => deleteTask(taskObj.id)}>Delete</button>
       </div>
+
     </div>
   );
 };

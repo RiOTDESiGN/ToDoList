@@ -61,7 +61,7 @@ textarea {
 
 button {
   height: 30px;
-  width: 96px;
+  width: 106px;
   border-radius: 7px;
 }
 
@@ -70,25 +70,47 @@ p {
   padding: 20px 0;
 }
 
-.fr {
+.addTaskTitle {
   display: flex;
   justify-content: space-between;
 }
 
-.fc {
+.searchAndSort {
   display: flex;
-  align-items: center;
-  flex-direction: column;
+  justify-content: right;
 }
 
 .task {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   margin: 30px 10px;
   padding: 20px;
   border-radius: 10px;
   background-color: #242424;
+}
+
+.taskContent {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.taskText {
+  max-width: 800px;
+  font-size: 14px;
+}
+
+.taskDates {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100px;
+  font-size: 14px;
+}
+
+.taskStatusbar {
+  display: flex;
+  justify-content: space-between;
 }
 
 .right {
@@ -97,10 +119,10 @@ p {
 
 .status-container {
   display: flex;
-  align-items: center;
+  gap: 10px;
 }
 .status-container label {
   display: flex;
   align-items: center;
-  font-size: 10px;
+  font-size: 14px;
 }

@@ -23,20 +23,25 @@ const App = () => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasks));
   }, [tasks]);
 
+  const generateTimestamp = () => {
+    return new Date().toLocaleString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    }).replace(/\//g, '.');
+  };
+
   const addTask = () => {
     if (task.title.trim() && task.text.trim()) {
       const newTask = {
         ...task,
         id: uuidv4(),
-        datestamp: new Date().toLocaleString('en-GB', {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
-          hour12: false
-        }).replace(/\//g, '.'),
+        dateCreated: generateTimestamp(),
+        dateUpdated: generateTimestamp(),
       };
       setTasks([newTask, ...tasks]);
       setTask({
@@ -66,44 +71,36 @@ const App = () => {
   }; 
 
   const updateTaskStatus = (taskId, status) => {
-    const now = new Date();
-    const timestampFormat = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-    const datestampFormat = { day: '2-digit', month: '2-digit', year: 'numeric' };
-  
-    const updatedtimestamp = now.toLocaleString('en-GB', timestampFormat).replace(/\//g, '.');
-    const updateddatestamp = now.toLocaleString('en-GB', datestampFormat).replace(/\//g, '.');
-  
-    setTasks(tasks.map(task => {
+    const updatedTasks = tasks.map(task => {
       if (task.id === taskId) {
-        return { ...task, status, updatedtimestamp, updateddatestamp };
+        return {
+          ...task,
+          status: status,
+          dateUpdated: generateTimestamp(),
+        };
       }
       return task;
-    }));
+    });
+    setTasks(updatedTasks);
   };
 
   const statuses = ['Planned', 'Ongoing', 'Done'];
 
   const sortTasks = (a, b) => {
-    const parseDateWithFallback = (task) => {
-      const updated = task.updateddatestamp && task.updatedtimestamp
-        ? new Date(`${task.updateddatestamp} ${task.updatedtimestamp}`).getTime()
-        : null;
-      const created = new Date(task.datestamp).getTime();
-      return updated || created;
-    };
-  
+    const getTime = (dateString) => new Date(dateString).getTime();
+    
     if (sortOption === 'time') {
-      const timeA = new Date(a.datestamp).getTime();
-      const timeB = new Date(b.datestamp).getTime();
+      const timeA = getTime(a.dateCreated);
+      const timeB = getTime(b.dateCreated);
       return sortOrder === 'asc' ? timeA - timeB : timeB - timeA;
     } else if (sortOption === 'status') {
       return sortOrder === 'asc' ? a.status.localeCompare(b.status) : b.status.localeCompare(a.status);
     } else if (sortOption === 'updated') {
-      const dateA = parseDateWithFallback(a);
-      const dateB = parseDateWithFallback(b);
+      const dateA = getTime(a.dateUpdated);
+      const dateB = getTime(b.dateUpdated);
       return sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
     }
-  };  
+  };
 
   const filterTasks = (task) => {
     return task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -114,7 +111,7 @@ const App = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div className='fr'>
+        <div className='addTaskTitle'>
           <input
             type="text"
             name="title"
@@ -133,7 +130,7 @@ const App = () => {
           onChange={handleInputChange}
         />
       </form>
-      <div>
+      <div className="searchAndSort">
         <input
           type="text"
           placeholder="Search tasks..."

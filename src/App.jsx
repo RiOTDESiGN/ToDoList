@@ -1,10 +1,13 @@
+import { signal } from "@preact/signals-react"
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Task from './Task';
 
+const LOCAL_STORAGE_KEY = "tasks";
+
 const App = () => {
   const [tasks, setTasks] = useState(() => {
-    const savedTasks = localStorage.getItem('tasks');
+    const savedTasks = localStorage.getItem(LOCAL_STORAGE_KEY);
     return savedTasks ? JSON.parse(savedTasks) : [];
   });
   const [task, setTask] = useState({
@@ -12,12 +15,12 @@ const App = () => {
     text: '',
     status: 'Planned',
   });
+  const [searchQuery, setSearchQuery] = useState('');
   const [sortOption, setSortOption] = useState('time');
   const [sortOrder, setSortOrder] = useState('desc');
-  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasks));
   }, [tasks]);
 
   const addTask = () => {
@@ -90,7 +93,6 @@ const App = () => {
     };
   
     if (sortOption === 'time') {
-
       const timeA = new Date(a.datestamp).getTime();
       const timeB = new Date(b.datestamp).getTime();
       return sortOrder === 'asc' ? timeA - timeB : timeB - timeA;

@@ -1,10 +1,8 @@
 const borderStyles = {
   Planned: { borderColor: 'red', borderStyle: 'dotted' },
   Ongoing: { borderColor: 'orange', borderStyle: 'dashed' },
-  Done: {
-    borderColor: 'green',
-    borderStyle: 'solid',
-    boxShadow: '0 0 50px 2px rgba(0, 255, 0, 0.2)',
+  Done: { borderColor: 'green', borderStyle: 'solid',
+          boxShadow: '0 0 50px 2px rgba(0, 255, 0, 0.2)',
   },
 };
 

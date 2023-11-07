@@ -48,7 +48,10 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask, statuses }) => 
         </div>
         <div className='taskDates'>
           <h3>{taskObj.dateCreated}</h3>
-          <h5>Marked as<br />{taskObj.status}<br />{taskObj.dateUpdated}</h5>
+          <div className="updated">
+            <h5>{taskObj.status}</h5>
+            <h6>{taskObj.dateUpdated}</h6>
+          </div>
         </div>
       </div>
       <div className='taskStatusbar'>

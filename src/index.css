@@ -43,11 +43,11 @@ body {
 form {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
-input, textarea {
-  border-radius: 10px;
+input {
+  height: 30px;
+  width: 100%;
 }
 input[type="radio"] {
   height: 11px;
@@ -55,12 +55,7 @@ input[type="radio"] {
   margin-right: 8px;
   cursor: pointer;
 }
-input:not([type="radio"]) {
-  height: 30px;
-  width: 300px;
-}
 textarea {
-  margin: 20px;
   padding: 20px;
   width: auto;
 }
@@ -70,8 +65,7 @@ label {
 
 button {
   height: 30px;
-  width: 58px;
-  border-radius: 7px;
+  width: 60px;
 }
 
 p {
@@ -92,9 +86,8 @@ p {
 .task {
   display: flex;
   flex-direction: column;
-  margin: 30px 10px;
+  margin: 30px 0;
   padding: 20px;
-  border-radius: 10px;
   background-color: #242424;
 }
 
@@ -112,9 +105,9 @@ p {
 .taskDates {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  width: 100px;
+  width: 120px;
   font-size: 14px;
+  text-align: right;
 }
 
 .taskStatusbar {
@@ -128,11 +121,17 @@ p {
 }
 
 .taskButtons {
-  border: 1px solid yellow;
-  border-radius: 6px;
+
 }
 
 .editTask {
   display: flex;
   flex-direction: column;
+  min-width: 800px;
+}
+
+.updated {
+  display: flex;
+  align-items: center;
+  justify-content: right;
 }

@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+
 const borderStyles = {
   Planned: { borderColor: 'red', borderStyle: 'dotted' },
   Ongoing: { borderColor: 'orange', borderStyle: 'dashed' },
@@ -6,28 +8,51 @@ const borderStyles = {
   },
 };
 
-const Task = ({ taskObj, updateTaskStatus, deleteTask, statuses }) => {
+const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask, statuses }) => {
   const getBorderStyle = (status) => ({
     borderWidth: '4px',
     ...borderStyles[status] || {},
   });
-  
+  const [isEditing, setIsEditing] = useState(false);
+  const [editableTitle, setEditableTitle] = useState(taskObj.title);
+  const [editableText, setEditableText] = useState(taskObj.text);
+
+  const handleEdit = () => {
+    if (isEditing) {
+      editTask(taskObj.id, editableTitle, editableText);
+    }
+    setIsEditing(!isEditing);
+  };
+
   return (
     <div className='task' style={getBorderStyle(taskObj.status)}>
-
       <div className='taskContent'>
         <div className='taskText'>
-          <h3>{taskObj.title}</h3>
-          <p>{taskObj.text}</p>
+          {isEditing ? (
+            <div className='editTask'>
+              <input 
+                value={editableTitle}
+                onChange={(e) => setEditableTitle(e.target.value)}
+              />
+              <textarea 
+                value={editableText}
+                onChange={(e) => setEditableText(e.target.value)}
+              />
+            </div>
+          ) : (
+            <>
+              <h3>{taskObj.title}</h3>
+              <p>{taskObj.text}</p>
+            </>
+          )}
         </div>
         <div className='taskDates'>
           <h3>{taskObj.dateCreated}</h3>
           <h5>Marked as<br />{taskObj.status}<br />{taskObj.dateUpdated}</h5>
         </div>
       </div>
-
       <div className='taskStatusbar'>
-        <div className='status-container'>
+        <div className="taskStatus">
           {statuses.map((status) => (
             <label key={status}>
               <input
@@ -41,9 +66,11 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, statuses }) => {
             </label>
           ))}
         </div>
-        <button onClick={() => deleteTask(taskObj.id)}>Delete</button>
+        <div className="taskButtons">
+          <button onClick={handleEdit}>{isEditing ? 'Save' : 'Edit'}</button>
+          <button onClick={() => deleteTask(taskObj.id)}>Del</button>
+        </div>
       </div>
-
     </div>
   );
 };

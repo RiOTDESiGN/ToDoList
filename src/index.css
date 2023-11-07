@@ -49,6 +49,12 @@ form {
 input, textarea {
   border-radius: 10px;
 }
+input[type="radio"] {
+  height: 11px;
+  width: 11px;
+  margin-right: 8px;
+  cursor: pointer;
+}
 input:not([type="radio"]) {
   height: 30px;
   width: 300px;
@@ -58,10 +64,13 @@ textarea {
   padding: 20px;
   width: auto;
 }
+label {
+  cursor: pointer;
+}
 
 button {
   height: 30px;
-  width: 106px;
+  width: 58px;
   border-radius: 7px;
 }
 
@@ -113,16 +122,17 @@ p {
   justify-content: space-between;
 }
 
-.right {
-  text-align: right;
+.taskStatus {
+  display: flex;
+  gap: 20px;
 }
 
-.status-container {
-  display: flex;
-  gap: 10px;
+.taskButtons {
+  border: 1px solid yellow;
+  border-radius: 6px;
 }
-.status-container label {
+
+.editTask {
   display: flex;
-  align-items: center;
-  font-size: 14px;
+  flex-direction: column;
 }

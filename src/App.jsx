@@ -84,7 +84,14 @@ const App = () => {
     return task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
             task.text.toLowerCase().includes(searchQuery.toLowerCase());
   };
-  
+
+  const editTask = (id, newTitle, newText) => {
+    setTasks(prevTasks =>
+      prevTasks.map(task =>
+        task.id === id ? { ...task, title: newTitle, text: newText, dateUpdated: generateTimestamp() } : task
+      )
+    );
+  };
 
   return (
     <div>
@@ -98,7 +105,7 @@ const App = () => {
             onChange={handleInputChange}
           />
           <button type="submit" disabled={!task.title.trim() || !task.text.trim()}>
-            Add Task
+            Add
           </button>
         </div>
         <textarea
@@ -137,6 +144,7 @@ const App = () => {
             updateTaskStatus={updateTaskStatus}
             deleteTask={deleteTask}
             statuses={statuses}
+            editTask={editTask}
           />
       ))}
       </div>

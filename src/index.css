@@ -85,6 +85,10 @@ button {
   border-bottom-left-radius: 10px;
   background-color: green;
 }
+.add-button-active:hover {
+  cursor: pointer;
+  color: white;
+}
 
 .searchfield {
   border-top-left-radius: 10px;

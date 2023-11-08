@@ -45,6 +45,10 @@ form {
   flex-direction: column;
 }
 
+select, input, textarea, button {
+  border: none;
+}
+
 input {
   height: 30px;
   width: 100%;
@@ -66,6 +70,15 @@ label {
 button {
   height: 30px;
   width: 60px;
+  font-weight: bold;
+}
+
+.sort-button {
+  background-color: white;
+}
+
+.sort-button-active {
+  background-color: green;
 }
 
 p {
@@ -89,6 +102,7 @@ p {
   margin: 30px 0;
   padding: 20px;
   background-color: #242424;
+  user-select: none;
 }
 
 .taskContent {
@@ -113,6 +127,11 @@ p {
 .taskStatusbar {
   display: flex;
   justify-content: space-between;
+}
+
+.taskStatusbar h4 {
+  font-size: 14px;
+  line-height: 0;
 }
 
 .taskStatus {

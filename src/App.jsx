@@ -40,7 +40,7 @@ const App = () => {
         text: task.text.trim(),
         status: 'Planned',
         dateCreated: generateTimestamp(),
-        dateUpdated: generateTimestamp(),
+        dateUpdated: null,
       }, ...prevTasks]);
       setTask({ title: '', text: '', status: 'Planned' });
     }
@@ -93,6 +93,15 @@ const App = () => {
     );
   };
 
+  const SortButton = ({ order }) => (
+    <button
+      onClick={() => setSortOrder(order)}
+      className={`sort-button ${sortOrder === order ? 'sort-button-active' : ''}`}
+    >
+      {order.charAt(0).toUpperCase() + order.slice(1)}
+    </button>
+  );
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -130,8 +139,8 @@ const App = () => {
           <option value="status">Sort by status</option>
           <option value="updated">Sort by time updated</option>
         </select>
-        <button onClick={() => setSortOrder('asc')}>Asc</button>
-        <button onClick={() => setSortOrder('desc')}>Desc</button>
+        <SortButton order="asc" />
+        <SortButton order="desc" />
       </div>
       <div>
       {tasks

@@ -48,10 +48,6 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask, statuses }) => 
         </div>
         <div className='taskDates'>
           <h3>{taskObj.dateCreated}</h3>
-          <div className="updated">
-            <h5>{taskObj.status}</h5>
-            <h6>{taskObj.dateUpdated}</h6>
-          </div>
         </div>
       </div>
       <div className='taskStatusbar'>
@@ -69,6 +65,15 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask, statuses }) => 
             </label>
           ))}
         </div>
+        <div className="updated">
+            {taskObj.dateUpdated ? (
+              <>
+                <h4>Updated</h4>&nbsp;:&nbsp;<h4>{taskObj.dateUpdated}</h4>
+              </>
+            ) : (
+              <h4></h4>
+            )}
+          </div>
         <div className="taskButtons">
           <button onClick={handleEdit}>{isEditing ? 'Save' : 'Edit'}</button>
           <button onClick={() => deleteTask(taskObj.id)}>Del</button>

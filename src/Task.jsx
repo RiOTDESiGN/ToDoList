@@ -1,21 +1,11 @@
 import React, { useState } from 'react';
-
-const borderStyles = {
-  Planned: { borderColor: 'red', borderStyle: 'dotted' },
-  Ongoing: { borderColor: 'orange', borderStyle: 'dashed' },
-  Done: { borderColor: 'green', borderStyle: 'solid',
-          boxShadow: '0 0 50px 2px rgba(0, 255, 0, 0.2)',
-  },
-};
+import Modal from './Modal';
 
 const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask, statuses }) => {
-  const getBorderStyle = (status) => ({
-    borderWidth: '4px',
-    ...borderStyles[status] || {},
-  });
   const [isEditing, setIsEditing] = useState(false);
   const [editableTitle, setEditableTitle] = useState(taskObj.title);
   const [editableText, setEditableText] = useState(taskObj.text);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleEdit = () => {
     if (isEditing) {
@@ -24,48 +14,67 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask, statuses }) => 
     setIsEditing(!isEditing);
   };
 
+  const handleCancel = () => {
+    setIsEditing(false);
+    setEditableTitle(taskObj.title);
+    setEditableText(taskObj.text);
+  };
+
   return (
-    <div className='task' style={getBorderStyle(taskObj.status)}>
-      <div className='taskContent'>
-        <div className='taskText'>
-          {isEditing ? (
-            <div className='editTask'>
-              <input 
-                value={editableTitle}
-                onChange={(e) => setEditableTitle(e.target.value)}
-              />
-              <textarea 
-                value={editableText}
-                onChange={(e) => setEditableText(e.target.value)}
-              />
-            </div>
-          ) : (
-            <>
-              <h3>{taskObj.title}</h3>
-              <p>{taskObj.text}</p>
-            </>
-          )}
+    <>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onConfirm={() => {
+          deleteTask(taskObj.id);
+          setIsModalOpen(false);
+        }}
+      >
+        <h2>Are you sure?</h2>
+        <p>Do you really want to delete this task? This action cannot be undone.</p>
+      </Modal>
+      <div className={`task ${taskObj.status}`}>
+      {isModalOpen && <div className="deletingOverlay">DELETING</div>}
+        <div className='taskContent'>
+          <div className='taskText'>
+            {isEditing ? (
+              <div className='editTask'>
+                <input 
+                  value={editableTitle}
+                  onChange={(e) => setEditableTitle(e.target.value)}
+                />
+                <textarea 
+                  value={editableText}
+                  onChange={(e) => setEditableText(e.target.value)}
+                />
+              </div>
+            ) : (
+              <>
+                <h3>{taskObj.title}</h3>
+                <p>{taskObj.text}</p>
+              </>
+            )}
+          </div>
+          <div className='taskDates'>
+            <h3>{taskObj.dateCreated}</h3>
+          </div>
         </div>
-        <div className='taskDates'>
-          <h3>{taskObj.dateCreated}</h3>
-        </div>
-      </div>
-      <div className='taskStatusbar'>
-        <div className="taskStatus">
-          {statuses.map((status) => (
-            <label key={status}>
-              <input
-                type="radio"
-                name={`status-${taskObj.id}`}
-                value={status}
-                checked={taskObj.status === status}
-                onChange={() => updateTaskStatus(taskObj.id, status)}
-              />
-              {status}
-            </label>
-          ))}
-        </div>
-        <div className="updated">
+        <div className='taskStatusbar'>
+          <div className="taskStatus">
+            {statuses.map((status) => (
+              <label key={status}>
+                <input
+                  type="radio"
+                  name={`status-${taskObj.id}`}
+                  value={status}
+                  checked={taskObj.status === status}
+                  onChange={() => updateTaskStatus(taskObj.id, status)}
+                />
+                {status}
+              </label>
+            ))}
+          </div>
+          <div className="updated">
             {taskObj.dateUpdated ? (
               <>
                 <h4>Updated</h4>&nbsp;:&nbsp;<h4>{taskObj.dateUpdated}</h4>
@@ -74,12 +83,22 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask, statuses }) => 
               <h4></h4>
             )}
           </div>
-        <div className="taskButtons">
-          <button onClick={handleEdit}>{isEditing ? 'Save' : 'Edit'}</button>
-          <button onClick={() => deleteTask(taskObj.id)}>Del</button>
+          <div className="actionButtons">
+            {isEditing ? (
+              <>
+                <button onClick={handleEdit}>Save</button>
+                <button onClick={handleCancel}>Cancel</button>
+              </>
+            ) : (
+              <>
+                <button onClick={handleEdit}>Edit</button>
+                <button onClick={() => setIsModalOpen(true)}>Del</button>
+              </>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

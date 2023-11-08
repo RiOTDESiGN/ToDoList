@@ -21,16 +21,21 @@ const App = () => {
   }, [tasks]);
 
   const generateTimestamp = () => {
-    return new Date().toLocaleString('en-GB', {
+    const datePart = new Date().toLocaleString('en-GB', {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric',
+    }).replace(/\//g, '.');
+  
+    const timePart = new Date().toLocaleString('en-GB', {
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',
       hour12: false
-    }).replace(/\//g, '.');
-  };
+    });
+  
+    return `${datePart}\n${timePart}`;
+  };  
 
   const addTask = () => {
     if (task.title.trim() && task.text.trim()) {

@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #252525;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -43,6 +43,8 @@ body {
 form {
   display: flex;
   flex-direction: column;
+  background-color: white;
+  border-radius: 10px;
 }
 
 select, input, textarea, button {
@@ -51,16 +53,15 @@ select, input, textarea, button {
 
 input {
   height: 30px;
+  padding: 0 20px;
   width: 100%;
-}
-input[type="radio"] {
-  height: 11px;
-  width: 11px;
-  margin-right: 8px;
-  cursor: pointer;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 textarea {
-  padding: 20px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 20px 0 0 20px;
   width: auto;
 }
 label {
@@ -71,6 +72,29 @@ button {
   height: 30px;
   width: 60px;
   font-weight: bold;
+}
+
+.add-button {
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background-color: #d8d8d8;
+}
+
+.add-button-active {
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background-color: green;
+}
+
+.searchfield {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 10px;
+}
+
+.desc-button {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .sort-button {
@@ -94,13 +118,14 @@ p {
 .searchAndSort {
   display: flex;
   justify-content: right;
+  margin-top: 30px;
 }
 
 .task {
   position: relative;
   display: flex;
   flex-direction: column;
-  margin: 30px 0;
+  margin: 30px 0 0 0;
   padding: 20px;
   user-select: none;
   border-radius: 10px;
@@ -129,19 +154,19 @@ p {
 }
 
 .taskText {
-  max-width: 800px;
+  max-width: 790px;
   font-size: 14px;
 }
 
 .taskDates {
   display: flex;
   flex-direction: column;
-  width: 120px;
+  width: 123px;
   font-size: 14px;
   text-align: center;
-  font-size: 20px;
+  font-size: 16px;
   color: black;
-  padding-bottom: 40px;
+  padding-bottom: 20px;
 }
 
 .taskStatusbar {
@@ -155,9 +180,47 @@ p {
 }
 
 .taskStatus {
+  padding-left: 24px;
   display: flex;
-  gap: 20px;
-  width: 50%;
+  gap: 50px;
+}
+.taskStatus input[type="radio"] {
+  display: none;
+}
+.taskStatus label {
+  position: relative;
+  cursor: pointer;
+}
+.taskStatus label::before {
+  position: absolute;
+  top: 4px;
+  left: -24px;
+  content: '';
+  display: block;
+  width: 16px;
+  height: 16px;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+.taskStatus input[type="radio"] {
+  top: 0px;
+  width: 22px;
+  height: 22px;
+}
+.taskStatus [value="Planned"]:checked + label::before {
+  background: red;
+}
+.taskStatus [value="Ongoing"]:checked + label::before {
+  background: orange;
+}
+.taskStatus [value="Done"]:checked + label::before {
+  top: -4px;
+  left: -25px;
+  width: 26px;
+  height: 26px;
+  background: green;
+  -webkit-mask: url('./assets/checkmark.png') center / contain no-repeat;
+          mask: url('./assets/checkmark.png') center / contain no-repeat;
 }
 
 .actionButtons {
@@ -178,7 +241,7 @@ p {
 .editTask {
   display: flex;
   flex-direction: column;
-  min-width: 800px;
+  min-width: 790px;
 }
 
 .updated {
@@ -195,7 +258,7 @@ p {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -207,6 +270,7 @@ p {
   display: flex;
   flex-direction: column;
   padding: 20px;
+  border-radius: 10px;
 }
 
 .deletingOverlay {
@@ -214,7 +278,7 @@ p {
   align-items: center;
   justify-content: center;
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
   color: white;
   width: 100%;
   height: 100%;

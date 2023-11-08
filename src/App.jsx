@@ -33,8 +33,10 @@ const App = () => {
       second: '2-digit',
       hour12: false
     });
+
+    const dayName = new Date().toLocaleString('en-US', { weekday: 'long' });
   
-    return `${datePart}\n${timePart}`;
+    return `${dayName}\n${datePart}\n${timePart}`;
   };  
 
   const addTask = () => {
@@ -69,8 +71,6 @@ const App = () => {
     setTasks(prevTasks => prevTasks.map(t => t.id === taskId ? { ...t, status, dateUpdated: generateTimestamp() } : t));
   };
 
-  const statuses = ['Planned', 'Ongoing', 'Done'];
-
   const getTime = dateString => new Date(dateString).getTime();
 
   const sortTasks = (a, b) => {
@@ -101,68 +101,77 @@ const App = () => {
   const SortButton = ({ order }) => (
     <button
       onClick={() => setSortOrder(order)}
-      className={`sort-button ${sortOrder === order ? 'sort-button-active' : ''}`}
+      className={`sort-button
+                  ${sortOrder === order ? 'sort-button-active' : ''}
+                  ${order === "desc" ? 'desc-button' : ''}
+                `}
     >
       {order.charAt(0).toUpperCase() + order.slice(1)}
     </button>
   );
 
+  const isDisabled = !task.title.trim() || !task.text.trim();
+
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div className='addTaskTitle'>
-          <input
-            type="text"
-            name="title"
-            placeholder="Title"
-            value={task.title}
+    <>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <div className='addTaskTitle'>
+            <input
+              type="text"
+              name="title"
+              placeholder="Title"
+              value={task.title}
+              onChange={handleInputChange}
+            />
+            <button className={`add-button ${!isDisabled ? 'add-button-active' : ''}`}
+                    type="submit"
+                    disabled={isDisabled}>
+              Add
+            </button>
+          </div>
+          <textarea
+            name="text"
+            placeholder="Text"
+            value={task.text}
             onChange={handleInputChange}
           />
-          <button type="submit" disabled={!task.title.trim() || !task.text.trim()}>
-            Add
-          </button>
+        </form>
+        <div className="searchAndSort">
+          <input
+            className='searchfield'
+            type="text"
+            placeholder="Search tasks..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <select
+            value={sortOption}
+            onChange={(e) => setSortOption(e.target.value)}
+          >
+            <option value="time">Sort by creation time</option>
+            <option value="status">Sort by status</option>
+            <option value="updated">Sort by time updated</option>
+          </select>
+          <SortButton order="asc" />
+          <SortButton order="desc" />
         </div>
-        <textarea
-          name="text"
-          placeholder="Text"
-          value={task.text}
-          onChange={handleInputChange}
-        />
-      </form>
-      <div className="searchAndSort">
-        <input
-          type="text"
-          placeholder="Search tasks..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <select
-          value={sortOption}
-          onChange={(e) => setSortOption(e.target.value)}
-        >
-          <option value="time">Sort by creation time</option>
-          <option value="status">Sort by status</option>
-          <option value="updated">Sort by time updated</option>
-        </select>
-        <SortButton order="asc" />
-        <SortButton order="desc" />
       </div>
       <div>
-      {tasks
-        .filter(filterTasks)
-        .sort(sortTasks)
-        .map((taskObj) => (
-          <Task
-            key={taskObj.id}
-            taskObj={taskObj}
-            updateTaskStatus={updateTaskStatus}
-            deleteTask={deleteTask}
-            statuses={statuses}
-            editTask={editTask}
-          />
-      ))}
+        {tasks
+          .filter(filterTasks)
+          .sort(sortTasks)
+          .map((taskObj) => (
+            <Task
+              key={taskObj.id}
+              taskObj={taskObj}
+              updateTaskStatus={updateTaskStatus}
+              deleteTask={deleteTask}
+              editTask={editTask}
+            />
+        ))}
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import Modal from './Modal';
 
-const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask, statuses }) => {
+const statuses = ['Planned', 'Ongoing', 'Done'];
+
+const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editableTitle, setEditableTitle] = useState(taskObj.title);
   const [editableText, setEditableText] = useState(taskObj.text);
@@ -62,16 +64,20 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask, statuses }) => 
         <div className='taskStatusbar'>
           <div className="taskStatus">
             {statuses.map((status) => (
-              <label key={status}>
+              <div key={status}>
                 <input
+                  id={`status-${status}-${taskObj.id}`}
                   type="radio"
                   name={`status-${taskObj.id}`}
                   value={status}
                   checked={taskObj.status === status}
                   onChange={() => updateTaskStatus(taskObj.id, status)}
+                  className="statusRadio"
                 />
-                {status}
-              </label>
+                <label htmlFor={`status-${status}-${taskObj.id}`}>
+                  {status}
+                </label>
+              </div>
             ))}
           </div>
           <div className="updated">

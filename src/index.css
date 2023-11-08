@@ -157,6 +157,7 @@ p {
 .taskStatus {
   display: flex;
   gap: 20px;
+  width: 50%;
 }
 
 .actionButtons {
@@ -184,6 +185,8 @@ p {
   display: flex;
   align-items: center;
   justify-content: right;
+  padding-right: 44px;
+  width: 100%;
 }
 
 .modalBackdrop {

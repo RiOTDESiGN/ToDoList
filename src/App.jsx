@@ -81,9 +81,11 @@ const App = () => {
       comparison = a.status.localeCompare(b.status);
     } else if (sortOption === 'updated') {
       comparison = getTime(a.dateUpdated) - getTime(b.dateUpdated);
+    } else if (sortOption === 'title') {
+      comparison = a.title.localeCompare(b.title);
     }
     return sortOrder === 'asc' ? comparison : -comparison;
-  };
+  };  
 
   const filterTasks = (task) => {
     return task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -152,6 +154,7 @@ const App = () => {
             <option value="time">Sort by creation time</option>
             <option value="status">Sort by status</option>
             <option value="updated">Sort by time updated</option>
+            <option value="title">Sort by title</option>
           </select>
           <SortButton order="asc" />
           <SortButton order="desc" />

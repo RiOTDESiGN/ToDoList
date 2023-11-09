@@ -74,6 +74,8 @@ const App = () => {
     setTasks(prevTasks => prevTasks.map(t => t.id === taskId ? { ...t, status, dateUpdated: generateTimestamp() } : t));
   };
 
+  const anyTaskUpdated = tasks.some(task => task.dateUpdated);
+
   const getTime = dateString => new Date(dateString).getTime();
 
   const sortTasks = (a, b) => {
@@ -159,7 +161,7 @@ const App = () => {
             >
               <option value="time">Sort by creation time</option>
               <option value="status">Sort by status</option>
-              <option value="updated">Sort by time updated</option>
+              <option value="updated" disabled={!anyTaskUpdated}>Sort by time updated</option>
               <option value="title">Sort by title</option>
             </select>
             <SortButton order="asc" />

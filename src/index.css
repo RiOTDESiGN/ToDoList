@@ -1,10 +1,13 @@
 :root {
+  --background-color: #3b3b3b;
+  --text-color: #fff;
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: var(--text-color);
   background-color: #252525;
 
   font-synthesis: none;
@@ -14,8 +17,6 @@
   -webkit-text-size-adjust: 100%;
 
   scroll-behavior: smooth;
-
-  --background-color: #3b3b3b;
 }
 
 *,
@@ -53,7 +54,7 @@ form {
 
 select, input, textarea, button {
   border: none;
-  color: white;
+  color: var(--text-color);
 }
 
 select {

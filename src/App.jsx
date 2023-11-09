@@ -144,26 +144,31 @@ const App = () => {
             resetKey={resetKey}
           />
         </form>
-        <div className="searchAndSort">
-          <input
-            className='searchfield'
-            type="text"
-            placeholder="Search tasks..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <select
-            value={sortOption}
-            onChange={(e) => setSortOption(e.target.value)}
-          >
-            <option value="time">Sort by creation time</option>
-            <option value="status">Sort by status</option>
-            <option value="updated">Sort by time updated</option>
-            <option value="title">Sort by title</option>
-          </select>
-          <SortButton order="asc" />
-          <SortButton order="desc" />
-        </div>
+        { tasks.length >= 2 ? (
+          <div className="searchAndSort">
+            <input
+              className='searchfield'
+              type="text"
+              placeholder="Search tasks..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <select
+              value={sortOption}
+              onChange={(e) => setSortOption(e.target.value)}
+            >
+              <option value="time">Sort by creation time</option>
+              <option value="status">Sort by status</option>
+              <option value="updated">Sort by time updated</option>
+              <option value="title">Sort by title</option>
+            </select>
+            <SortButton order="asc" />
+            <SortButton order="desc" />
+          </div>
+          ) : (
+            <></>
+          )
+        }
       </div>
       <div>
         {tasks

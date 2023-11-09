@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Task from './Task';
+import ResizableTextarea from './ResizableTextarea';
 
 const LOCAL_STORAGE_KEY = "tasks";
 
@@ -15,6 +16,7 @@ const App = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOption, setSortOption] = useState('time');
   const [sortOrder, setSortOrder] = useState('desc');
+  const [resetKey, setResetKey] = useState(0); // Reset textarea height to default
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasks));
@@ -40,7 +42,7 @@ const App = () => {
   };  
 
   const addTask = () => {
-    if (task.title.trim() && task.text.trim()) {
+    if (task.title.trim() || task.text.trim()) {
       setTasks(prevTasks => [{
         id: uuidv4(),
         title: task.title.trim(),
@@ -50,6 +52,7 @@ const App = () => {
         dateUpdated: null,
       }, ...prevTasks]);
       setTask({ title: '', text: '', status: 'Planned' });
+      setResetKey(prevKey => prevKey + 1);
     }
   };
 
@@ -112,7 +115,7 @@ const App = () => {
     </button>
   );
 
-  const isDisabled = !task.title.trim() || !task.text.trim();
+  const isDisabled = !task.title.trim();
 
   return (
     <>
@@ -120,6 +123,7 @@ const App = () => {
         <form onSubmit={handleSubmit}>
           <div className='addTaskTitle'>
             <input
+              className='createTaskTitle'
               type="text"
               name="title"
               placeholder="Title"
@@ -132,11 +136,12 @@ const App = () => {
               Add
             </button>
           </div>
-          <textarea
+          <ResizableTextarea
             name="text"
             placeholder="Text"
             value={task.text}
             onChange={handleInputChange}
+            resetKey={resetKey}
           />
         </form>
         <div className="searchAndSort">

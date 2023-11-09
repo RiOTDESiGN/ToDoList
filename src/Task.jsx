@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import Modal from './Modal';
+import ResizableTextarea from './ResizableTextarea';
 
 const statuses = ['Planned', 'Ongoing', 'Done'];
 
@@ -14,6 +16,15 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask }) => {
       editTask(taskObj.id, editableTitle, editableText);
     }
     setIsEditing(!isEditing);
+  };
+
+  const formatTextWithLineBreaks = (text) => {
+    return text.split('\n').map((line) => (
+      <React.Fragment key={uuidv4()}>
+        {line}
+        <br />
+      </React.Fragment>
+    ));
   };
 
   const handleCancel = () => {
@@ -33,7 +44,8 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask }) => {
         }}
       >
         <h2>Are you sure?</h2>
-        <p>Do you really want to delete this task? This action cannot be undone.</p>
+        <p>Do you really want to delete the task named "{taskObj.title}"?</p>
+        <p className='right'>This action cannot be undone.</p>
       </Modal>
       <div className={`task ${taskObj.status}`}>
       {isModalOpen && <div className="deletingOverlay">DELETING</div>}
@@ -42,18 +54,20 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask }) => {
             {isEditing ? (
               <div className='editTask'>
                 <input 
+                  className='editTaskTitle'
                   value={editableTitle}
                   onChange={(e) => setEditableTitle(e.target.value)}
                 />
-                <textarea 
+                <ResizableTextarea 
                   value={editableText}
                   onChange={(e) => setEditableText(e.target.value)}
+                  editing={isEditing}
                 />
               </div>
             ) : (
               <>
                 <h3>{taskObj.title}</h3>
-                <p>{taskObj.text}</p>
+                <p>{formatTextWithLineBreaks(taskObj.text)}</p>
               </>
             )}
           </div>
@@ -93,12 +107,12 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask }) => {
             {isEditing ? (
               <>
                 <button onClick={handleEdit}>Save</button>
-                <button onClick={handleCancel}>Cancel</button>
+                <button onClick={handleCancel} className="cancel-button">Cancel</button>
               </>
             ) : (
               <>
                 <button onClick={handleEdit}>Edit</button>
-                <button onClick={() => setIsModalOpen(true)}>Del</button>
+                <button onClick={() => setIsModalOpen(true)} className="delete-button">Del</button>
               </>
             )}
           </div>

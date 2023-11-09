@@ -9,7 +9,7 @@ const Modal = ({ isOpen, onClose, onConfirm, children }) => {
         {children}
         <div className="actionButtons">
           <button onClick={onConfirm}>Yes</button>
-          <button onClick={onClose}>No</button>
+          <button className='cancel-button' onClick={onClose}>No</button>
         </div>
       </div>
     </div>

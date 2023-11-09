@@ -12,6 +12,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  scroll-behavior: smooth;
 }
 
 *,
@@ -43,8 +45,8 @@ body {
 form {
   display: flex;
   flex-direction: column;
-  background-color: white;
-  border-radius: 10px;
+  background-color: #3b3b3b;
+  border-radius: 13px;
 }
 
 select, input, textarea, button {
@@ -55,15 +57,22 @@ input {
   height: 30px;
   padding: 0 20px;
   width: 100%;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  background-color: #3b3b3b;
 }
 textarea {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  padding: 20px 0 0 20px;
+  padding: 20px;
   width: auto;
+  resize: none;
+  background-color: #3b3b3b;
 }
+
+input:focus, textarea:focus {
+  outline: none;
+  background-color: #494949;
+}
+
 label {
   cursor: pointer;
 }
@@ -77,7 +86,7 @@ button {
 .add-button {
   border-top-right-radius: 10px;
   border-bottom-left-radius: 10px;
-  background-color: #d8d8d8;
+  background-color: #3b3b3b;
 }
 
 .add-button-active {
@@ -87,12 +96,12 @@ button {
 }
 .add-button-active:hover {
   cursor: pointer;
-  color: white;
+  color: green;
+  background-color: black;
 }
 
 .searchfield {
   border-top-left-radius: 10px;
-  border-top-right-radius: 0px;
   border-bottom-left-radius: 10px;
 }
 
@@ -102,11 +111,17 @@ button {
 }
 
 .sort-button {
-  background-color: white;
+  background-color: #3b3b3b;
 }
 
 .sort-button-active {
   background-color: green;
+}
+
+.sort-button:hover {
+  cursor: pointer;
+  color: green;
+  background-color: black;
 }
 
 p {
@@ -160,6 +175,15 @@ p {
 .taskText {
   max-width: 790px;
   font-size: 14px;
+}
+
+.createTaskTitle {
+  border-top-left-radius: 10px;
+}
+
+.editTaskTitle {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .taskDates {
@@ -238,8 +262,12 @@ p {
 }
 .actionButtons *:hover {
   background-color: black;
-  color: white;
+  color: green;
   cursor: pointer;
+}
+
+.cancel-button:hover, .delete-button:hover {
+  color: red; /* This will change the text color to red on hover */
 }
 
 .editTask {
@@ -275,6 +303,10 @@ p {
   flex-direction: column;
   padding: 20px;
   border-radius: 10px;
+}
+
+.right {
+  text-align: right;
 }
 
 .deletingOverlay {

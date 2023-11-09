@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Task from './Task';
 import ResizableTextarea from './ResizableTextarea';
+import CustomSelect from './CustomSelect';
 
 const LOCAL_STORAGE_KEY = "tasks";
 
@@ -119,6 +120,15 @@ const App = () => {
 
   const isDisabled = !task.title.trim();
 
+  const options = [
+    { value: 'time', label: 'Sort by creation time', disabled: false },
+    { value: 'status', label: 'Sort by status', disabled: false },
+    { value: 'updated', label: 'Sort by time updated', disabled: !anyTaskUpdated },
+    { value: 'title', label: 'Sort by title', disabled: false },
+  ];
+  
+  const disabledOptions = anyTaskUpdated ? [] : ['updated'];
+
   return (
     <>
       <div>
@@ -155,15 +165,11 @@ const App = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-            <select
+            <CustomSelect
               value={sortOption}
-              onChange={(e) => setSortOption(e.target.value)}
-            >
-              <option value="time">Sort by creation time</option>
-              <option value="status">Sort by status</option>
-              <option value="updated" disabled={!anyTaskUpdated}>Sort by time updated</option>
-              <option value="title">Sort by title</option>
-            </select>
+              onChange={setSortOption}
+              options={options}
+            />
             <SortButton order="asc" />
             <SortButton order="desc" />
           </div>

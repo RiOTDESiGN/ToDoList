@@ -48,7 +48,7 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask }) => {
         <p className='right'>This action cannot be undone.</p>
       </Modal>
       <div className={`task ${taskObj.status}`}>
-      {isModalOpen && <div className="deletingOverlay">DELETING</div>}
+      {isModalOpen && <div className="deletingOverlay"></div>}
         <div className='taskContent'>
           <div className='taskText'>
             {isEditing ? (

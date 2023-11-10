@@ -331,18 +331,12 @@ p {
 }
 
 .deletingOverlay {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: absolute;
-  color: rgba(255, 255, 255, 0.15);
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-  padding-bottom: 15px;
   z-index: 1;
-  font-size: 6rem;
   border: 3px dashed red;
   border-radius: 10px;
 }

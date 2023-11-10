@@ -1,0 +1,37 @@
+:root {
+  --app-background-color: #252525;
+  --text-color: #ffffff;
+  --input-and-button-placeholder-color: #ffffff80;
+  --input-and-button-background-color: #3b3b3b;
+  --input-and-button-focus-color: #494949;
+  --CTA: #008000;
+  --CTA-border: #000;
+  --CTA-background: #000;
+  --task-border-color: #000;
+  --task-dates-font-color: #000;
+  --task-background-color: #242424;
+  --task-status-radiobutton-border-color: #000;
+  --task-planned-status-color: #ff0000;
+  --task-ongoing-status-color: #ffa500;
+  --task-done-status-color: #008000;
+  --cancel-and-delete-font-color: #ff0000;
+}
+
+.ocean-theme {
+  --app-background-color: #222222;
+  --text-color: #DAE9F5;
+  --input-and-button-placeholder-color: #dae9f580;
+  --input-and-button-background-color: #322940;
+  --input-and-button-focus-color:#4c3f61;
+  --CTA: #000;
+  --CTA-border: #000;
+  --CTA-background: #DAE9F5;
+  --task-border-color: #000;
+  --task-dates-font-color: #000;
+  --task-background-color: #322940;
+  --task-status-radiobutton-border-color: #000;
+  --task-planned-status-color: #DD4545;
+  --task-ongoing-status-color: #E79D6C;
+  --task-done-status-color: #397D5B;
+  --cancel-and-delete-font-color: #ff0000;
+}

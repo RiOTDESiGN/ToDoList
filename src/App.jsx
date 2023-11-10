@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Task from './Task';
 import ResizableTextarea from './ResizableTextarea';
 import CustomSelect from './CustomSelect';
+import ThemeSwitcher from './ThemeSwitcher';
 
 const LOCAL_STORAGE_KEY = "tasks";
 
@@ -165,6 +166,7 @@ const App = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
+            <ThemeSwitcher />
             <CustomSelect
               value={sortOption}
               onChange={setSortOption}

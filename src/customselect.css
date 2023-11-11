@@ -35,7 +35,7 @@
 .select-items div,.select-selected {
   font-size: 12px;
   color: var(--text-color);
-  padding: 7px 16px;
+  padding: 5px 16px;
   border: 1px solid transparent;
   cursor: pointer;
 }

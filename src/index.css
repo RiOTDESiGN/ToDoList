@@ -10,7 +10,7 @@
 
 :root {
   font-family: Typewriter, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  /* line-height: 1.5; */
+  line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
@@ -18,6 +18,7 @@
   background-color: var(--app-background-color);
   background-image: url('./assets/monstera.jpg');
   background-size: cover;
+  background-position: top center;
   background-repeat: no-repeat;
   font-size: 1rem;
   font-synthesis: none;
@@ -61,8 +62,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(10px);
+  /* backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); */
   z-index: -1;
 }
 
@@ -73,12 +74,14 @@ form {
   padding: 20px 20px 0 20px;
   background-color: var(--input-and-button-background-color);
   border-radius: 13px;
+  border: var(--border);
 }
 
 input, textarea, button {
   border: none;
   color: var(--text-color);
   font-family: Typewriter;
+  line-height: 1.5;
 }
 
 input {
@@ -116,6 +119,10 @@ button {
   font-weight: bold;
   font-family: monospace;
   text-transform: uppercase;
+}
+
+h3 {
+  line-height: 1.22;
 }
 
 ::placeholder {
@@ -262,6 +269,7 @@ p {
 .taskStatus {
   padding-left: 24px;
   display: flex;
+  align-items: center;
   gap: 50px;
 }
 .taskStatus input[type="radio"] {

@@ -132,6 +132,12 @@ const App = () => {
     <>
       <div>
         <div className='background-image-blur'></div>
+        <div className="appTitle">
+          <div className="mainTitle">Traffic Lights
+            <div className="subTitleShadow">Taskmanager</div>
+            <div className="subTitle">Taskmanager</div>
+          </div>
+        </div>
         <form onSubmit={handleSubmit}>
           <div className='addTaskTitle'>
             <input

@@ -1,5 +1,5 @@
 @font-face {
-  font-family: "Antro";
+  font-family: "Handwritten";
   src: url("./assets/Antro_Vectra_Bolder.otf") format("opentype");
 }
 
@@ -11,13 +11,11 @@
 :root {
   font-family: Typewriter, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  font-weight: 400;
 
   color-scheme: light dark;
   color: var(--text-color);
   background-color: var(--app-background-color);
-  background-image: url('./assets/monstera.jpg');
-  background-size: cover;
+  background-size: auto;
   background-position: top center;
   background-repeat: no-repeat;
   font-size: 1rem;
@@ -125,6 +123,49 @@ h3 {
   line-height: 1.22;
 }
 
+.appTitle {
+  text-align: right;
+  width: 100%;
+  padding-top: 60px;
+  pointer-events: none;
+}
+.mainTitle {
+  position: relative;
+  line-height: 10px;
+  font-family: Handwritten;
+  font-size: 100px;
+}
+.subTitleShadow {
+  position: absolute;
+  font-family: Typewriter;
+  height: 56px;
+  font-size: 50px;
+  line-height: 48px;
+  top: 22px;
+  right: 105px;
+  color: transparent;
+  text-shadow: -1px 1px 0 #000, 
+                1px 1px 0 #000, 
+                1px -1px 0 #000, 
+                -1px -1px 10px #000;
+}
+.subTitle {
+  position: absolute;
+  font-family: Typewriter;
+  height: 56px;
+  font-size: 50px;
+  line-height: 48px;
+  top: 22px;
+  right: 105px;
+  background: linear-gradient(to right, 
+              var(--status-planned-color), 
+              var(--status-ongoing-color), 
+              var(--status-done-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 ::placeholder {
   color: var(--input-and-button-placeholder-color);
   opacity: 1; /* Firefox */
@@ -142,19 +183,22 @@ h3 {
 
 .add-button-active {
   border-radius: 8px;
-  background-color: var(--CTA);
+  background-color: var(--input-and-button-focus-color);
   color: var(--text-color);
   font-size: 14px;
 }
 .add-button-active:hover {
   cursor: pointer;
-  color: var(--CTA);
-  background-color: var(--CTA-background);
+  color: var(--text-color);
+  background-color: var(--hover);
 }
 
 .searchfield {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 100px;
+  font-size: 13px;
 }
 
 .desc-button {
@@ -167,13 +211,13 @@ h3 {
 }
 
 .sort-button-active {
-  background-color: var(--CTA);
+  background-color: var(--input-and-button-focus-color);
 }
 
 .sort-button:hover {
   cursor: pointer;
-  color: var(--CTA);
-  background-color: var(--CTA-background);
+  color: var(--text-color);
+  background-color: var(--hover);
 }
 
 p {
@@ -190,6 +234,8 @@ p {
   display: flex;
   justify-content: right;
   margin-top: 30px;
+  border: var(--border);
+  border-radius: 10px;
 }
 
 .task {
@@ -230,6 +276,7 @@ p {
 .createTaskTitle {
   padding: 0px;
   border-radius: 10px;
+  width: 520px;
 }
 
 .editTaskTitle {
@@ -252,12 +299,12 @@ p {
   width: 123px;
   height: 123px;
   text-align: center;
-  padding-bottom: 6px;
+  padding-top: 1px;
   padding-right: 2px;
   margin-bottom: 20px;
   border-radius: 50%;
   background-color: var(--app-background-color);
-  font-family: Antro;
+  font-family: Handwritten;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 
@@ -326,13 +373,13 @@ p {
   border-radius: 6px;
 }
 .actionButtons *:hover {
-  background-color: var(--CTA-background);
-  color: var(--CTA);
+  background-color: var(--hover);
+  color: var(--text-color);
   cursor: pointer;
 }
 
 .cancel-button:hover, .delete-button:hover {
-  color: var(--cancel-and-delete-font-color);
+  /* color: var(--cancel-and-delete-font-color); */
 }
 
 .editTask {
@@ -382,11 +429,12 @@ p {
 
 .deletingOverlay {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  margin: 2px;
   top: 0;
   left: 0;
   z-index: 1;
-  border: 3px dashed red;
-  border-radius: 10px;
+  border: 3px dashed var(--hover);
+  border-radius: 8px;
 }

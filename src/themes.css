@@ -1,4 +1,6 @@
 :root {
+  background-image: url('./assets/forest.jpg');
+
   --app-background-color: #252525;
   --border-color: #000000;
   --text-color: #ffffff;
@@ -7,16 +9,13 @@
   --input-and-button-background-color: #3b3b3b;
   --input-and-button-focus-color: #494949;
 
-  --CTA: #008000;
-  --CTA-background: #000;
+  --hover: #252525;
 
   --task-background-color: #242424;
 
   --status-planned-color: #ff0000;
   --status-ongoing-color: #ffa500;
   --status-done-color: #008000;
-
-  --cancel-and-delete-font-color: #ff0000;
 
   --border: 2px solid var(--border-color);
 
@@ -26,6 +25,8 @@
 }
 
 .ocean-theme {
+  background-image: url('./assets/monstera.jpg');
+
   --app-background-color: #08090A;
   --border-color: #000000;
   --text-color: #DAE9F5;
@@ -34,16 +35,13 @@
   --input-and-button-background-color: #162f5a;
   --input-and-button-focus-color: #0e1d38;
 
-  --CTA: #000;
-  --CTA-background: #DAE9F5;
+  --hover: #08090A;
 
   --task-background-color: #0e1d38;
 
   --status-planned-color: #DD4545;
   --status-ongoing-color: #E79D6C;
   --status-done-color: #397D5B;
-
-  --cancel-and-delete-font-color: #ff0000;
 
   --border: 2px solid var(--border-color);
 

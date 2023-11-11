@@ -13,6 +13,10 @@
   background-color: var(--input-and-button-background-color);
 }
 
+.select-selected:hover {
+  background-color: var(--hover);
+} 
+
 /* Style the arrow inside the select element: */
 .select-selected:after {
   position: absolute;
@@ -55,6 +59,10 @@
   display: none;
 }
 
-.select-items div:hover, .same-as-selected {
+.same-as-selected {
   background-color: var(--input-and-button-focus-color);
+}
+
+.select-items div:hover {
+  background-color: var(--hover);
 }

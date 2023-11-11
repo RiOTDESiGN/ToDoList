@@ -41,7 +41,7 @@ const App = () => {
     const dayName = new Date().toLocaleString('en-US', { weekday: 'long' });
   
     return `${dayName}\n${datePart}\n${timePart}`;
-  };  
+  };
 
   const addTask = () => {
     if (task.title.trim() || task.text.trim()) {
@@ -127,19 +127,18 @@ const App = () => {
     { value: 'updated', label: 'Sort by time updated', disabled: !anyTaskUpdated },
     { value: 'title', label: 'Sort by title', disabled: false },
   ];
-  
-  const disabledOptions = anyTaskUpdated ? [] : ['updated'];
 
   return (
     <>
       <div>
+        <div className='background-image-blur'></div>
         <form onSubmit={handleSubmit}>
           <div className='addTaskTitle'>
             <input
               className='createTaskTitle'
               type="text"
               name="title"
-              placeholder="Title"
+              placeholder="Give your task a title.."
               value={task.title}
               onChange={handleInputChange}
             />
@@ -151,7 +150,7 @@ const App = () => {
           </div>
           <ResizableTextarea
             name="text"
-            placeholder="Text"
+            placeholder="..and write your task objectives here."
             value={task.text}
             onChange={handleInputChange}
             resetKey={resetKey}

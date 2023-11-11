@@ -36,7 +36,7 @@ const CustomSelect = ({ value, onChange, options }) => {
           <div
             key={option.value}
             onClick={() => handleOptionClick(option.value)}
-            className={`select-item ${value === option.value ? 'same-as-selected' : ''} ${option.disabled ? 'disabled' : ''}`}
+            className={`select-item ${value === option.value ? 'same-as-selected' : ''} ${option.disabled ? 'select-hide' : ''}`}
           >
             {option.label}
           </div>

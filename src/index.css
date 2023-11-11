@@ -1,12 +1,25 @@
+@font-face {
+  font-family: "Antro";
+  src: url("./assets/Antro_Vectra_Bolder.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Typewriter";
+  src: url("./assets/JMH_Typewriter.otf") format("opentype");
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: Typewriter, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* line-height: 1.5; */
   font-weight: 400;
 
   color-scheme: light dark;
   color: var(--text-color);
   background-color: var(--app-background-color);
-
+  background-image: url('./assets/monstera.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-size: 1rem;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -42,9 +55,22 @@ body {
   margin: 50px auto;
 }
 
+.background-image-blur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: -1;
+}
+
 form {
   display: flex;
+  gap: 20px;
   flex-direction: column;
+  padding: 20px 20px 0 20px;
   background-color: var(--input-and-button-background-color);
   border-radius: 13px;
 }
@@ -52,20 +78,25 @@ form {
 input, textarea, button {
   border: none;
   color: var(--text-color);
+  font-family: Typewriter;
 }
 
 input {
   height: 30px;
   padding: 0 20px;
   width: 100%;
+  font-size: 1.17em;
   background-color: var(--input-and-button-background-color);
 }
 textarea {
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-radius: 10px;
   padding: 20px;
+  margin-bottom: 20px;
+  min-height: 82px;
   width: auto;
   resize: none;
+  font-size: 1rem;
+  text-align: justify;
   background-color: var(--input-and-button-background-color);
 }
 
@@ -81,7 +112,10 @@ label {
 button {
   height: 30px;
   width: 60px;
+  font-size: 12px;
   font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;
 }
 
 ::placeholder {
@@ -94,15 +128,16 @@ button {
 }
 
 .add-button {
-  border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px;
   background-color: var(--input-and-button-background-color);
+  color: var(--input-and-button-background-color);
+  margin-left: 20px;
 }
 
 .add-button-active {
-  border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px;
+  border-radius: 8px;
   background-color: var(--CTA);
+  color: var(--text-color);
+  font-size: 14px;
 }
 .add-button-active:hover {
   cursor: pointer;
@@ -136,7 +171,7 @@ button {
 
 p {
   text-align: justify;
-  padding: 20px 0;
+  padding: 20px 20px 40px 20px;
 }
 
 .addTaskTitle {
@@ -161,61 +196,67 @@ p {
 }
 
 .Planned, .Ongoing, .Done {
-  border: 1px solid var(--task-border-color);
+  border: var(--border);
 }
 
 .Planned {
-  background: linear-gradient(to right, var(--task-background-color) 0%, var(--task-background-color) 83.5%, var(--task-planned-status-color) 83.5%, var(--task-planned-status-color) 100%);
+  background: var(--planned-status-background);
 }
 
 .Ongoing {
-  background: linear-gradient(to right, var(--task-background-color) 0%, var(--task-background-color) 83.5%, var(--task-ongoing-status-color) 83.5%, var(--task-ongoing-status-color) 100%);
+  background: var(--ongoing-status-background);
 }
 
 .Done {
-  background: linear-gradient(to right, var(--task-background-color) 0%, var(--task-background-color) 83.5%, var(--task-done-status-color) 83.5%, var(--task-done-status-color) 100%);
+  background: var(--done-status-background);
 }
 
 .taskContent {
   display: flex;
   justify-content: space-between;
-  gap: 30px;
 }
 
 .taskText {
-  max-width: 790px;
-  font-size: 14px;
+  max-width: 812px;
 }
 
 .createTaskTitle {
-  border-top-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  padding: 0px;
+  border-radius: 10px;
 }
 
 .editTaskTitle {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  font-size: 1.17em;
+  padding-left: 0px;
+  height: 23px;
+}
+
+.editTaskText {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
 
 .taskDates {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   width: 123px;
-  font-size: 14px;
+  height: 123px;
   text-align: center;
-  font-size: 16px;
-  color: var(--task-dates-font-color);
-  padding-bottom: 20px;
+  padding-bottom: 6px;
+  padding-right: 2px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  background-color: var(--app-background-color);
+  font-family: Antro;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 
 .taskStatusbar {
   display: flex;
   justify-content: space-between;
-}
-
-.taskStatusbar h4 {
-  font-size: 14px;
-  line-height: 0;
 }
 
 .taskStatus {
@@ -232,13 +273,13 @@ p {
 }
 .taskStatus label::before {
   position: absolute;
-  top: 4px;
+  top: 2px;
   left: -24px;
   content: '';
   display: block;
   width: 16px;
   height: 16px;
-  border: 1px solid var(--task-status-radiobutton-border-color);
+  border: var(--border);
   border-radius: 50%;
   background-color: var(--app-background-color);
 }
@@ -248,17 +289,20 @@ p {
   height: 22px;
 }
 .taskStatus [value="Planned"]:checked + label::before {
-  background: var(--task-planned-status-color);
+  border: 1px solid var(--status-planned-color);
+  background: var(--status-planned-color);
 }
 .taskStatus [value="Ongoing"]:checked + label::before {
-  background: var(--task-ongoing-status-color);
+  border: 1px solid var(--status-ongoing-color);
+  background: var(--status-ongoing-color);
 }
 .taskStatus [value="Done"]:checked + label::before {
-  top: -4px;
+  top: -6px;
   left: -25px;
   width: 26px;
   height: 26px;
-  background: var(--task-done-status-color);
+  border: 1px solid var(--status-done-color);
+  background: var(--status-done-color);
   -webkit-mask: url('./assets/checkmark.png') center / contain no-repeat;
           mask: url('./assets/checkmark.png') center / contain no-repeat;
 }
@@ -266,10 +310,10 @@ p {
 .actionButtons {
   display: flex;
   justify-content: right;
-  gap: 4px;
+  gap: 3px;
 }
 .actionButtons * {
-  border: 2px solid var(--CTA-border);
+  border: var(--border);
   background-color: var(--input-and-button-background-color);
   border-radius: 6px;
 }
@@ -286,14 +330,14 @@ p {
 .editTask {
   display: flex;
   flex-direction: column;
-  min-width: 790px;
+  min-width: 812px;
 }
 
 .updated {
   display: flex;
   align-items: center;
   justify-content: right;
-  padding-right: 44px;
+  padding-right: 20px;
   width: 100%;
 }
 
@@ -316,7 +360,12 @@ p {
   flex-direction: column;
   padding: 20px;
   border-radius: 10px;
-  border: 2px solid var(--task-border-color);
+  border: var(--border);
+}
+
+.modalContent button {
+  font-size: 16px;
+  padding-bottom: 2px;
 }
 
 .right {

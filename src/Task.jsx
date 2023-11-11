@@ -59,6 +59,7 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask }) => {
                   onChange={(e) => setEditableTitle(e.target.value)}
                 />
                 <ResizableTextarea 
+                  className='editTaskText'
                   value={editableText}
                   onChange={(e) => setEditableText(e.target.value)}
                   editing={isEditing}
@@ -72,7 +73,7 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask }) => {
             )}
           </div>
           <div className='taskDates'>
-            <h3>{taskObj.dateCreated}</h3>
+            <h4>{taskObj.dateCreated}</h4>
           </div>
         </div>
         <div className='taskStatusbar'>
@@ -97,10 +98,10 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask }) => {
           <div className="updated">
             {taskObj.dateUpdated ? (
               <>
-                <h4>Updated</h4>&nbsp;:&nbsp;<h4>{taskObj.dateUpdated}</h4>
+                <h4>Updated : {taskObj.dateUpdated}</h4>
               </>
             ) : (
-              <h4></h4>
+              <></>
             )}
           </div>
           <div className="actionButtons">
@@ -112,7 +113,7 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask }) => {
             ) : (
               <>
                 <button onClick={handleEdit}>Edit</button>
-                <button onClick={() => setIsModalOpen(true)} className="delete-button">Del</button>
+                <button onClick={() => setIsModalOpen(true)} className="delete-button">Delete</button>
               </>
             )}
           </div>

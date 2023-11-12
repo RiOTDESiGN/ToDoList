@@ -14,10 +14,10 @@
 
   color-scheme: light dark;
   color: var(--text-color);
-  background-color: var(--app-background-color);
-  background-size: auto;
-  background-position: top center;
+  background-color: var(--app-and-hover-background-color);
+  background-size: cover;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   font-size: 1rem;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -71,7 +71,7 @@ form {
   flex-direction: column;
   padding: 20px 20px 0 20px;
   background-color: var(--input-and-button-background-color);
-  border-radius: 13px;
+  border-radius: 10px;
   border: var(--border);
 }
 
@@ -190,20 +190,20 @@ h3 {
 .add-button-active:hover {
   cursor: pointer;
   color: var(--text-color);
-  background-color: var(--hover);
+  background-color: var(--app-and-hover-background-color);
 }
 
 .searchfield {
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 100px;
   font-size: 13px;
 }
 
 .desc-button {
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 .sort-button {
@@ -217,7 +217,7 @@ h3 {
 .sort-button:hover {
   cursor: pointer;
   color: var(--text-color);
-  background-color: var(--hover);
+  background-color: var(--app-and-hover-background-color);
 }
 
 p {
@@ -303,7 +303,7 @@ p {
   padding-right: 2px;
   margin-bottom: 20px;
   border-radius: 50%;
-  background-color: var(--app-background-color);
+  background-color: var(--app-and-hover-background-color);
   font-family: Handwritten;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
@@ -336,7 +336,7 @@ p {
   height: 16px;
   border: var(--border);
   border-radius: 50%;
-  background-color: var(--app-background-color);
+  background-color: var(--app-and-hover-background-color);
 }
 .taskStatus input[type="radio"] {
   top: 0px;
@@ -373,7 +373,7 @@ p {
   border-radius: 6px;
 }
 .actionButtons *:hover {
-  background-color: var(--hover);
+  background-color: var(--app-and-hover-background-color);
   color: var(--text-color);
   cursor: pointer;
 }
@@ -435,6 +435,6 @@ p {
   top: 0;
   left: 0;
   z-index: 1;
-  border: 3px dashed var(--hover);
+  border: 3px dashed var(--app-and-hover-background-color);
   border-radius: 8px;
 }

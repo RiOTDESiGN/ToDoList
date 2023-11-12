@@ -13,7 +13,8 @@ const ThemeSwitcher = () => {
 
   const themeOptions = [
     { value: 'original-theme', label: 'Original Theme', disabled: false },
-    { value: 'ocean-theme', label: 'Ocean Theme', disabled: false },
+    { value: 'jungle-theme', label: 'Jungle Theme', disabled: false },
+    { value: 'desert-theme', label: 'Desert Theme', disabled: false },
     // add more themes here
   ];
 

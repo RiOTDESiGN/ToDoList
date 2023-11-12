@@ -14,7 +14,7 @@
 }
 
 .select-selected:hover {
-  background-color: var(--hover);
+  background-color: var(--app-and-hover-background-color);
 } 
 
 /* Style the arrow inside the select element: */
@@ -64,5 +64,5 @@
 }
 
 .select-items div:hover {
-  background-color: var(--hover);
+  background-color: var(--app-and-hover-background-color);
 }

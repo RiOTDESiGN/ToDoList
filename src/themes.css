@@ -1,15 +1,14 @@
 :root {
   background-image: url('./assets/forest.jpg');
+  background-position: 0px -200px;
 
-  --app-background-color: #252525;
+  --app-and-hover-background-color: #252525;
   --border-color: #000000;
   --text-color: #ffffff;
 
   --input-and-button-placeholder-color: #ffffff80;
   --input-and-button-background-color: #3b3b3b;
   --input-and-button-focus-color: #494949;
-
-  --hover: #252525;
 
   --task-background-color: #242424;
 
@@ -19,15 +18,16 @@
 
   --border: 2px solid var(--border-color);
 
-  --planned-status-background: linear-gradient(to right, var(--task-background-color) 0%, var(--status-planned-color) 100%);
-  --ongoing-status-background: linear-gradient(to right, var(--task-background-color) 0%, var(--status-ongoing-color) 100%);
-  --done-status-background: linear-gradient(to right, var(--task-background-color) 0%, var(--status-done-color) 100%);
+  --planned-status-background: linear-gradient(to right, var(--task-background-color) 32%, var(--status-planned-color) 100%);
+  --ongoing-status-background: linear-gradient(to right, var(--task-background-color) 32%, var(--status-ongoing-color) 100%);
+  --done-status-background: linear-gradient(to right, var(--task-background-color) 32%, var(--status-done-color) 100%);
 }
 
-.ocean-theme {
+.jungle-theme {
   background-image: url('./assets/monstera.jpg');
+  background-position: 0px -200px;
 
-  --app-background-color: #08090A;
+  --app-and-hover-background-color: #08090A;
   --border-color: #000000;
   --text-color: #DAE9F5;
 
@@ -35,13 +35,36 @@
   --input-and-button-background-color: #162f5a;
   --input-and-button-focus-color: #0e1d38;
 
-  --hover: #08090A;
-
   --task-background-color: #0e1d38;
 
   --status-planned-color: #DD4545;
   --status-ongoing-color: #E79D6C;
   --status-done-color: #397D5B;
+
+  --border: 2px solid var(--border-color);
+
+  --planned-status-background: linear-gradient(to right, var(--task-background-color) 32%, var(--status-planned-color) 100%);
+  --ongoing-status-background: linear-gradient(to right, var(--task-background-color) 32%, var(--status-ongoing-color) 100%);
+  --done-status-background: linear-gradient(to right, var(--task-background-color) 32%, var(--status-done-color) 100%);
+}
+
+.desert-theme {
+  background-image: url('./assets/industrial.jpg');
+  background-position: 0px;
+
+  --app-and-hover-background-color: #6b6b6b;
+  --border-color: #000000;
+  --text-color: #1a1a1a;
+
+  --input-and-button-placeholder-color: #000000;
+  --input-and-button-background-color: #b6b6b6;
+  --input-and-button-focus-color: #575757;
+
+  --task-background-color: #c4c4c4;
+
+  --status-planned-color: #ff1616;
+  --status-ongoing-color: #ffd000;
+  --status-done-color: #00ff22;
 
   --border: 2px solid var(--border-color);
 

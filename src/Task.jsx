@@ -43,9 +43,8 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask }) => {
           setIsModalOpen(false);
         }}
       >
-        <h2>Are you sure?</h2>
-        <p>Do you really want to delete the task named "{taskObj.title}"?</p>
-        <p className='right'>This action cannot be undone.</p>
+        <h2>Delete task ?</h2>
+        <p className='deletingTask'>"{taskObj.title}"</p>
       </Modal>
       <div className={`task ${taskObj.status}`}>
       {isModalOpen && <div className="deletingOverlay"></div>}
@@ -108,12 +107,12 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask }) => {
             {isEditing ? (
               <>
                 <button onClick={handleEdit}>Save</button>
-                <button onClick={handleCancel} className="cancel-button">Cancel</button>
+                <button onClick={handleCancel}>Cancel</button>
               </>
             ) : (
               <>
                 <button onClick={handleEdit}>Edit</button>
-                <button onClick={() => setIsModalOpen(true)} className="delete-button">Delete</button>
+                <button onClick={() => setIsModalOpen(true)}>Delete</button>
               </>
             )}
           </div>

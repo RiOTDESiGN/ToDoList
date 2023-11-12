@@ -4,13 +4,13 @@
 
   --app-and-hover-background-color: #252525;
   --border-color: #000000;
-  --text-color: #ffffff;
+  --text-color: #eeeeee;
 
   --input-and-button-placeholder-color: #ffffff80;
-  --input-and-button-background-color: #3b3b3b;
-  --input-and-button-focus-color: #494949;
+  --input-and-button-background-color: #454545;
+  --input-and-button-selected-color: #515151;
 
-  --task-background-color: #242424;
+  --task-background-color: #343434;
 
   --status-planned-color: #ff0000;
   --status-ongoing-color: #ffa500;
@@ -33,7 +33,7 @@
 
   --input-and-button-placeholder-color: #dae9f580;
   --input-and-button-background-color: #162f5a;
-  --input-and-button-focus-color: #0e1d38;
+  --input-and-button-selected-color: #0e1d38;
 
   --task-background-color: #0e1d38;
 
@@ -48,23 +48,23 @@
   --done-status-background: linear-gradient(to right, var(--task-background-color) 32%, var(--status-done-color) 100%);
 }
 
-.desert-theme {
+.industrial-theme {
   background-image: url('./assets/industrial.jpg');
   background-position: 0px;
 
-  --app-and-hover-background-color: #6b6b6b;
+  --app-and-hover-background-color: #c3c8d4;
   --border-color: #000000;
   --text-color: #1a1a1a;
 
   --input-and-button-placeholder-color: #000000;
   --input-and-button-background-color: #b6b6b6;
-  --input-and-button-focus-color: #575757;
+  --input-and-button-selected-color: #8e8e8e;
 
-  --task-background-color: #c4c4c4;
+  --task-background-color: #a1a3a2;
 
-  --status-planned-color: #ff1616;
-  --status-ongoing-color: #ffd000;
-  --status-done-color: #00ff22;
+  --status-planned-color: #bdbdbd;
+  --status-ongoing-color: #888888;
+  --status-done-color: #525252;
 
   --border: 2px solid var(--border-color);
 

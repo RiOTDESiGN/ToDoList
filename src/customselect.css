@@ -15,7 +15,7 @@
 
 .select-selected:hover {
   background-color: var(--app-and-hover-background-color);
-} 
+}
 
 /* Style the arrow inside the select element: */
 .select-selected:after {
@@ -27,6 +27,7 @@
   height: 0;
   border: 6px solid transparent;
   border-color: var(--text-color) transparent transparent transparent;
+  transition: .3s;
 }
 
 /* Point the arrow upwards when the select box is open (active): */
@@ -52,6 +53,19 @@
   left: 0;
   right: 0;
   z-index: 99;
+  border: var(--border);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top: none;
+}
+
+.select-items > :first-child {
+  border-top: none;
+}
+
+.select-items > :last-child {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 /* Hide the items when the select box is closed: */
@@ -60,7 +74,7 @@
 }
 
 .same-as-selected {
-  background-color: var(--input-and-button-focus-color);
+  background-color: var(--input-and-button-selected-color);
 }
 
 .select-items div:hover {

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './customselect.css'
+import React, { useState, useRef } from 'react';
+import './customselect.css';
 
 const CustomSelect = ({ value, onChange, options }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,24 +11,16 @@ const CustomSelect = ({ value, onChange, options }) => {
     setIsOpen(false);
   };
 
-  const toggleDropdown = () => setIsOpen(!isOpen);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
   return (
-    <div className="custom-select" ref={wrapperRef}>
-      <div className={`select-selected ${isOpen ? 'select-arrow-active' : ''}`} onClick={toggleDropdown}>
+    <div 
+      className="custom-select" 
+      ref={wrapperRef} 
+      onMouseLeave={() => setIsOpen(false)}
+    >
+      <div 
+        className={`select-selected ${isOpen ? 'select-arrow-active' : ''}`} 
+        onMouseEnter={() => setIsOpen(true)}
+      >
         {options.find(option => option.value === value).label}
       </div>
       <div className={`select-items ${!isOpen ? 'select-hide' : ''}`}>

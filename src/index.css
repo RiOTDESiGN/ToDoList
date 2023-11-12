@@ -103,7 +103,7 @@ textarea {
 
 input:focus, textarea:focus {
   outline: none;
-  background-color: var(--input-and-button-focus-color);
+  background-color: var(--input-and-button-selected-color);
 }
 
 label {
@@ -117,6 +117,12 @@ button {
   font-weight: bold;
   font-family: monospace;
   text-transform: uppercase;
+}
+
+h2 {
+  text-align: center;
+  padding-bottom: 20px;
+  margin: 0 60px;
 }
 
 h3 {
@@ -183,7 +189,7 @@ h3 {
 
 .add-button-active {
   border-radius: 8px;
-  background-color: var(--input-and-button-focus-color);
+  background-color: var(--input-and-button-selected-color);
   color: var(--text-color);
   font-size: 14px;
 }
@@ -211,7 +217,7 @@ h3 {
 }
 
 .sort-button-active {
-  background-color: var(--input-and-button-focus-color);
+  background-color: var(--input-and-button-selected-color);
 }
 
 .sort-button:hover {
@@ -305,6 +311,7 @@ p {
   border-radius: 50%;
   background-color: var(--app-and-hover-background-color);
   font-family: Handwritten;
+  border: var(--border);
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 
@@ -378,10 +385,6 @@ p {
   cursor: pointer;
 }
 
-.cancel-button:hover, .delete-button:hover {
-  /* color: var(--cancel-and-delete-font-color); */
-}
-
 .editTask {
   display: flex;
   flex-direction: column;
@@ -402,7 +405,7 @@ p {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -423,8 +426,12 @@ p {
   padding-bottom: 2px;
 }
 
-.right {
-  text-align: right;
+.deletingTask {
+  padding-bottom: 20px;
+  text-align: center;
+  background-color: var(--app-and-hover-background-color);
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
 
 .deletingOverlay {

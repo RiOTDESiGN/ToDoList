@@ -2,15 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import { ThemeProvider } from './ThemeContext';
-import './themes.css'
-import './index.css'
-import "./assets/Antro_Vectra_Bolder.otf";
-import "./assets/JMH_Typewriter.otf";
+
+const savedTheme = localStorage.getItem('appTheme') || 'original';
+document.documentElement.className = savedTheme;
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ThemeProvider>
+    <ThemeProvider initialTheme={savedTheme}>
       <App />
     </ThemeProvider>
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);

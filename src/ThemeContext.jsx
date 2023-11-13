@@ -4,12 +4,13 @@ const ThemeContext = createContext();
 
 export const useTheme = () => useContext(ThemeContext);
 
-export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState('original');
+export const ThemeProvider = ({ children, initialTheme }) => {
+  const [theme, setTheme] = useState(initialTheme || 'original');
 
   const toggleTheme = (themeName) => {
     setTheme(themeName);
     document.documentElement.className = themeName;
+    localStorage.setItem('appTheme', themeName);
   };
 
   return (

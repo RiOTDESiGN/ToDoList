@@ -15,7 +15,6 @@ const ThemeSwitcher = () => {
     { value: 'original-theme', label: 'Original Theme', disabled: false },
     { value: 'jungle-theme', label: 'Jungle Theme', disabled: false },
     { value: 'industrial-theme', label: 'Industrial Theme', disabled: false },
-    // add more themes here
   ];
 
   return (

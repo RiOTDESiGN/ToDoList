@@ -5,6 +5,11 @@ import ResizableTextarea from './ResizableTextarea';
 import CustomSelect from './CustomSelect';
 import ThemeSwitcher from './ThemeSwitcher';
 
+import './themes.css'
+import './index.css'
+import "./assets/Antro_Vectra_Bolder.otf";
+import "./assets/JMH_Typewriter.otf";
+
 const LOCAL_STORAGE_KEY = "tasks";
 
 const loadSavedTasks = () => {

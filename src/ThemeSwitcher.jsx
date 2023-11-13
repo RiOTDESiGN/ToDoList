@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTheme } from './ThemeContext';
 import CustomSelect from './CustomSelect';
 
 const ThemeSwitcher = () => {
-  const { toggleTheme } = useTheme();
-  const [selectedTheme, setSelectedTheme] = useState('original-theme');
+  const { theme, toggleTheme } = useTheme();
 
   const handleThemeChange = (newValue) => {
-    setSelectedTheme(newValue);
     toggleTheme(newValue);
-  };
+  };  
 
   const themeOptions = [
     { value: 'original-theme', label: 'Original Theme', disabled: false },
@@ -19,7 +17,7 @@ const ThemeSwitcher = () => {
 
   return (
     <CustomSelect
-      value={selectedTheme}
+      value={theme}
       onChange={handleThemeChange}
       options={themeOptions}
     />

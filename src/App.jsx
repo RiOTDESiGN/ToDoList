@@ -83,7 +83,15 @@ const App = () => {
 
   const anyTaskUpdated = tasks.some(task => task.dateUpdated);
 
-  const getTime = dateString => new Date(dateString).getTime();
+  const getTime = dateString => {
+    if (!dateString) return -Infinity;
+    const parts = dateString.match(/(\d{2})\.(\d{2})\.(\d{4})\n(\d{2}):(\d{2}):(\d{2})/);
+    if (parts) {
+      const [, day, month, year, hour, minute, second] = parts;
+      return new Date(year, month - 1, day, hour, minute, second).getTime();
+    }
+    return -Infinity;
+  };  
 
   const sortTasks = (a, b) => {
     let comparison = 0;
@@ -92,7 +100,9 @@ const App = () => {
     } else if (sortOption === 'status') {
       comparison = a.status.localeCompare(b.status);
     } else if (sortOption === 'updated') {
-      comparison = getTime(a.dateUpdated) - getTime(b.dateUpdated);
+      const timeA = a.dateUpdated ? getTime(a.dateUpdated) : -Infinity;
+      const timeB = b.dateUpdated ? getTime(b.dateUpdated) : -Infinity;
+      comparison = timeA - timeB;
     } else if (sortOption === 'title') {
       comparison = a.title.localeCompare(b.title);
     }

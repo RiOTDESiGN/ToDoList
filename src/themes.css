@@ -1,6 +1,5 @@
 :root {
   background-image: url('./assets/forest.jpg');
-  background-position: 0px -200px;
 
   --app-and-hover-background-color: #252525;
   --border-color: #000000;
@@ -19,7 +18,6 @@
 
 .jungle-theme {
   background-image: url('./assets/monstera.jpg');
-  background-position: 0px -200px;
 
   --app-and-hover-background-color: #08090A;
   --border-color: #000000;
@@ -38,7 +36,6 @@
 
 .industrial-theme {
   background-image: url('./assets/industrial.jpg');
-  background-position: 0px;
 
   --app-and-hover-background-color: #c3c8d4;
   --border-color: #000000;

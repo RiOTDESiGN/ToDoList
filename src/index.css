@@ -9,15 +9,17 @@
 }
 
 :root {
-  font-family: Typewriter, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-
   color-scheme: light dark;
   color: var(--text-color);
+
   background-color: var(--app-and-hover-background-color);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  min-height: 100dvh;
+
+  font-family: Typewriter, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
   font-size: 1rem;
   font-synthesis: none;
   text-rendering: optimizeLegibility;

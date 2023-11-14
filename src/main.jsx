@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import { ThemeProvider } from './ThemeContext';
 
-const savedTheme = localStorage.getItem('appTheme') || 'original';
+const savedTheme = localStorage.getItem('appTheme') || 'default';
 document.documentElement.className = savedTheme;
 
 ReactDOM.createRoot(document.getElementById('root')).render(

@@ -15,12 +15,6 @@
   --status-planned-color: #ff0000;
   --status-ongoing-color: #ffa500;
   --status-done-color: #008000;
-
-  --border: 2px solid var(--border-color);
-
-  --planned-status-background: linear-gradient(to right, var(--task-background-color) 32%, var(--status-planned-color) 100%);
-  --ongoing-status-background: linear-gradient(to right, var(--task-background-color) 32%, var(--status-ongoing-color) 100%);
-  --done-status-background: linear-gradient(to right, var(--task-background-color) 32%, var(--status-done-color) 100%);
 }
 
 .jungle-theme {
@@ -40,12 +34,6 @@
   --status-planned-color: #DD4545;
   --status-ongoing-color: #E79D6C;
   --status-done-color: #397D5B;
-
-  --border: 2px solid var(--border-color);
-
-  --planned-status-background: linear-gradient(to right, var(--task-background-color) 32%, var(--status-planned-color) 100%);
-  --ongoing-status-background: linear-gradient(to right, var(--task-background-color) 32%, var(--status-ongoing-color) 100%);
-  --done-status-background: linear-gradient(to right, var(--task-background-color) 32%, var(--status-done-color) 100%);
 }
 
 .industrial-theme {
@@ -65,10 +53,4 @@
   --status-planned-color: #bdbdbd;
   --status-ongoing-color: #888888;
   --status-done-color: #525252;
-
-  --border: 2px solid var(--border-color);
-
-  --planned-status-background: linear-gradient(to right, var(--task-background-color) 32%, var(--status-planned-color) 100%);
-  --ongoing-status-background: linear-gradient(to right, var(--task-background-color) 32%, var(--status-ongoing-color) 100%);
-  --done-status-background: linear-gradient(to right, var(--task-background-color) 32%, var(--status-done-color) 100%);
 }

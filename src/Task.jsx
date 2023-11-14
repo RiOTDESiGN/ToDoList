@@ -48,74 +48,70 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask }) => {
       </Modal>
       <div className={`task ${taskObj.status}`}>
       {isModalOpen && <div className="deletingOverlay"></div>}
-        <div className='taskContent'>
-          <div className='taskText'>
-            {isEditing ? (
-              <div className='editTask'>
-                <input 
-                  className='editTaskTitle'
-                  value={editableTitle}
-                  onChange={(e) => setEditableTitle(e.target.value)}
-                />
-                <ResizableTextarea 
-                  className='editTaskText'
-                  value={editableText}
-                  onChange={(e) => setEditableText(e.target.value)}
-                  editing={isEditing}
-                />
-              </div>
-            ) : (
-              <>
-                <h3>{taskObj.title}</h3>
-                <p>{formatTextWithLineBreaks(taskObj.text)}</p>
-              </>
-            )}
-          </div>
-          <div className='taskDates'>
-            <h4>{taskObj.dateCreated}</h4>
-          </div>
+        <div className='taskText'>
+          {isEditing ? (
+            <div className='editTask'>
+              <input 
+                className='editTaskTitle'
+                value={editableTitle}
+                onChange={(e) => setEditableTitle(e.target.value)}
+              />
+              <ResizableTextarea 
+                className='editTaskText'
+                value={editableText}
+                onChange={(e) => setEditableText(e.target.value)}
+                editing={isEditing}
+              />
+            </div>
+          ) : (
+            <>
+              <h3>{taskObj.title}</h3>
+              <p>{formatTextWithLineBreaks(taskObj.text)}</p>
+            </>
+          )}
         </div>
-        <div className='taskStatusbar'>
-          <div className="taskStatus">
-            {statuses.map((status) => (
-              <div key={status}>
-                <input
-                  id={`status-${status}-${taskObj.id}`}
-                  type="radio"
-                  name={`status-${taskObj.id}`}
-                  value={status}
-                  checked={taskObj.status === status}
-                  onChange={() => updateTaskStatus(taskObj.id, status)}
-                  className="statusRadio"
-                />
-                <label htmlFor={`status-${status}-${taskObj.id}`}>
-                  {status}
-                </label>
-              </div>
-            ))}
-          </div>
-          <div className="updated">
-            {taskObj.dateUpdated ? (
-              <>
-                <h4>Updated : {taskObj.dateUpdated}</h4>
-              </>
-            ) : (
-              <></>
-            )}
-          </div>
-          <div className="actionButtons">
-            {isEditing ? (
-              <>
-                <button onClick={handleEdit}>Save</button>
-                <button onClick={handleCancel}>Cancel</button>
-              </>
-            ) : (
-              <>
-                <button onClick={handleEdit}>Edit</button>
-                <button onClick={() => setIsModalOpen(true)}>Delete</button>
-              </>
-            )}
-          </div>
+        <div className='taskDates'>
+          <h4>{taskObj.dateCreated}</h4>
+        </div>
+        <div className="taskStatus">
+          {statuses.map((status) => (
+            <div key={status}>
+              <input
+                id={`status-${status}-${taskObj.id}`}
+                type="radio"
+                name={`status-${taskObj.id}`}
+                value={status}
+                checked={taskObj.status === status}
+                onChange={() => updateTaskStatus(taskObj.id, status)}
+                className="statusRadio"
+              />
+              <label htmlFor={`status-${status}-${taskObj.id}`}>
+                {status}
+              </label>
+            </div>
+          ))}
+        </div>
+        <div className="updated">
+          {taskObj.dateUpdated ? (
+            <>
+              <h4>Updated : {taskObj.dateUpdated}</h4>
+            </>
+          ) : (
+            <></>
+          )}
+        </div>
+        <div className="actionButtons">
+          {isEditing ? (
+            <>
+              <button onClick={handleEdit}>Save</button>
+              <button onClick={handleCancel}>Cancel</button>
+            </>
+          ) : (
+            <>
+              <button onClick={handleEdit}>Edit</button>
+              <button onClick={() => setIsModalOpen(true)}>Delete</button>
+            </>
+          )}
         </div>
       </div>
     </>

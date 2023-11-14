@@ -148,15 +148,16 @@ const App = () => {
       <div>
         <div className='background-image-blur'></div>
         <div className="appTitle">
-          <div className="mainTitle">Traffic Lights
-            <div className="subTitleShadow">Taskmanager</div>
-            <div className="subTitle">Taskmanager</div>
+          <div className="mainTitle">
+            Traffic Lights
+            <div className="subTitle subTitleShadow">Taskmanager</div>
+            <div className="subTitle subTitleFront">Taskmanager</div>
           </div>
         </div>
         <form onSubmit={handleSubmit}>
           <div className='addTaskTitle'>
             <input
-              className='createTaskTitle'
+              className={`createTaskTitle ${task.title.length > 0 ? 'contains-text' : ''}`}
               type="text"
               name="title"
               placeholder="Give your task a title.."
@@ -170,6 +171,7 @@ const App = () => {
             </button>
           </div>
           <ResizableTextarea
+            className={`${task.title.length > 0 ? 'contains-text' : ''}`}
             name="text"
             placeholder="..and write your task objectives here."
             value={task.text}
@@ -186,14 +188,18 @@ const App = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-            <ThemeSwitcher />
-            <CustomSelect
+            <div className="themeswitcher-container">
+              <ThemeSwitcher className="themeswitcher"/>
+            </div>
+            <CustomSelect className="sort-by"
               value={sortOption}
               onChange={setSortOption}
               options={options}
             />
-            <SortButton order="asc" />
-            <SortButton order="desc" />
+            <div className="sort-buttons">
+              <SortButton order="asc" />
+              <SortButton order="desc" />
+            </div>
           </div>
           ) : (
             <></>

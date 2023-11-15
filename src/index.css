@@ -207,9 +207,10 @@ h3 {
 
 .searchAndSort {
   display: grid;
-  grid-template-columns: auto 170px 170px 120px;
+  grid-template-columns: auto 170px 290px;
+  grid-template-rows: 1fr;
   grid-template-areas: 
-  "search theme sort order";
+  "search theme sort";
   margin-top: 30px;
   border: var(--border);
   border-radius: 10px;
@@ -223,13 +224,13 @@ h3 {
   font-size: 13px;
 }
 .themeswitcher {
+  width: 170px;
   grid-area: theme;
 }
-.sort-by {
+.sortswitcher {
+  display: grid;
+  grid-template-columns: auto 60px 60px;
   grid-area: sort;
-}
-.sort-buttons {
-  grid-area: order;
 }
 .sort-button {
   background-color: var(--input-and-button-background-color);
@@ -493,10 +494,10 @@ p {
     width: 100%;
   }
   .searchAndSort {
-    grid-template-columns: auto 170px 120px;
+    grid-template-columns: auto 290px;
     grid-template-rows: 1fr;
     grid-template-areas: 
-    "search sort order";
+    "search sort";
   }
   .themeswitcher-container {
     display: none;
@@ -549,11 +550,11 @@ p {
     top: -7px;
   }
   .searchAndSort {
-    grid-template-columns: auto 120px;
+    grid-template-columns: auto;
     grid-template-rows: 1fr 1fr;
     grid-template-areas: 
-    "search search"
-    "sort order";
+    "search"
+    "sort";
   }
   .searchfield {
     border-top-left-radius: 8px;

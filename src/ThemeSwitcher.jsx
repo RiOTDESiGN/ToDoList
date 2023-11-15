@@ -15,9 +15,13 @@ const ThemeSwitcher = () => {
     { value: 'industrial-theme', label: 'Industrial Theme', disabled: false },
   ];
 
+  const isValidTheme = themeOptions.some(option => option.value === theme);
+  const themeName = isValidTheme ? theme : 'default-theme';
+
   return (
     <CustomSelect
-      value={theme}
+      className='themeswitcher'
+      value={themeName}
       onChange={handleThemeChange}
       options={themeOptions}
     />

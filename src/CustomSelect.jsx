@@ -11,6 +11,8 @@ const CustomSelect = ({ value, onChange, options }) => {
     setIsOpen(false);
   };
 
+  const selectedOption = options.find(option => option.value === value);
+
   return (
     <div 
       className="custom-select" 
@@ -21,7 +23,7 @@ const CustomSelect = ({ value, onChange, options }) => {
         className={`select-selected ${isOpen ? 'select-arrow-active' : ''}`} 
         onMouseEnter={() => setIsOpen(true)}
       >
-        {options.find(option => option.value === value).label}
+        {selectedOption ? selectedOption.label : 'Select an option..'}
       </div>
       <div className={`select-items ${!isOpen ? 'select-hide' : ''}`}>
         {options.map(option => (

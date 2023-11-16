@@ -214,6 +214,7 @@ h3 {
   margin-top: 30px;
   border: var(--border);
   border-radius: 10px;
+  background-color: var(--input-and-button-background-color);
 }
 .searchfield {
   grid-area: search;

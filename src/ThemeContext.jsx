@@ -13,8 +13,16 @@ export const ThemeProvider = ({ children, initialTheme }) => {
     localStorage.setItem('appTheme', themeName);
   };
 
+  const resetTheme = () => {
+    const defaultTheme = 'default-theme';
+    setTheme(defaultTheme);
+    document.documentElement.className = defaultTheme;
+    localStorage.setItem('appTheme', defaultTheme);
+    console.log("Theme has been reset.");
+  };
+
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, resetTheme }}>
       {children}
     </ThemeContext.Provider>
   );

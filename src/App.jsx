@@ -1,9 +1,19 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { useTheme } from './ThemeContext';
+
 import Task from './Task';
 import ResizableTextarea from './ResizableTextarea';
 import ThemeSwitcher from './ThemeSwitcher';
 import SortSwitcher from './SortSwitcher';
+
+// ! Testing Firebase
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { signOut } from "firebase/auth";
+import { auth } from './firebase';
+import { useNavigate } from 'react-router-dom';
+import Signup from './Signup';
+// import Logout from './Logout';
 
 import './themes.css'
 import './index.css'
@@ -23,6 +33,50 @@ const App = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [resetKey, setResetKey] = useState(0); // Reset textarea height to default
   const [sortedTasks, setSortedTasks] = useState([]);
+  // ! Testing Firebase
+  const { resetTheme } = useTheme();
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(()=>{
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/firebase.User
+          const uid = user.uid;
+          // ...
+          console.log("uid", uid)
+        } else {
+          // User is signed out
+          // ...
+          resetTheme();
+          console.log("user is logged out")
+        }
+      });
+
+  }, []);
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {               
+    signOut(auth).then(() => {
+    // Sign-out successful.
+      resetTheme();
+      navigate("/");
+      console.log("Signed out successfully");
+    }).catch((error) => {
+    // An error happened.
+    console.log("Error.");
+    });
+  }
+  // ! End Testing Firebase
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasks));
@@ -142,9 +196,11 @@ const App = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
+          {user && 
           <div className="themeswitcher-container">
-            <ThemeSwitcher />
+          <ThemeSwitcher user={user} />
           </div>
+          }
           <SortSwitcher
             tasks={filteredTasks}
             onSortedTasksChange={setSortedTasks}
@@ -161,6 +217,20 @@ const App = () => {
             editTask={editTask}
           />
         ))}
+      </div>
+      <br />
+      <br />
+      <br />
+      {/* Testing Firebase */}
+      <div className="test-firebase">
+        {!user ? (<Signup />) : (
+          <div>
+            <button onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
+        )}
+
       </div>
     </>
   );

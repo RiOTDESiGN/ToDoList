@@ -13,7 +13,6 @@ import { signOut } from "firebase/auth";
 import { auth } from './firebase';
 import { useNavigate } from 'react-router-dom';
 import Signup from './Signup';
-// import Logout from './Logout';
 
 import './themes.css'
 import './index.css'
@@ -33,9 +32,20 @@ const App = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [resetKey, setResetKey] = useState(0); // Reset textarea height to default
   const [sortedTasks, setSortedTasks] = useState([]);
-  // ! Testing Firebase
+  // * * * * * Firebase Authentication * * * * * //
+  const navigate = useNavigate();
   const { resetTheme } = useTheme();
   const [user, setUser] = useState(null);
+  const handleLogout = () => {               
+    signOut(auth).then(() => {
+      resetTheme();
+      navigate("/");
+      console.log("Signed out successfully");
+    }).catch((error) => {
+      console.log("Error:", error);
+    });
+  }
+
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -44,39 +54,7 @@ const App = () => {
 
     return () => unsubscribe();
   }, []);
-
-  useEffect(()=>{
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-          // User is signed in, see docs for a list of available properties
-          // https://firebase.google.com/docs/reference/js/firebase.User
-          const uid = user.uid;
-          // ...
-          console.log("uid", uid)
-        } else {
-          // User is signed out
-          // ...
-          resetTheme();
-          console.log("user is logged out")
-        }
-      });
-
-  }, []);
-
-  const navigate = useNavigate();
-
-  const handleLogout = () => {               
-    signOut(auth).then(() => {
-    // Sign-out successful.
-      resetTheme();
-      navigate("/");
-      console.log("Signed out successfully");
-    }).catch((error) => {
-    // An error happened.
-    console.log("Error.");
-    });
-  }
-  // ! End Testing Firebase
+  // * * * * * Firebase Authentication * * * * * //
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasks));
@@ -198,7 +176,7 @@ const App = () => {
           />
           {user && 
           <div className="themeswitcher-container">
-          <ThemeSwitcher user={user} />
+          <ThemeSwitcher />
           </div>
           }
           <SortSwitcher

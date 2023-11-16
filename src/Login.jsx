@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import {  signInWithEmailAndPassword   } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from './firebase';
 import { NavLink, useNavigate } from 'react-router-dom'
+import { trackLoginEvent } from './GoogleAnalyticsEvents'
 
 const Login = () => {
     const navigate = useNavigate();
@@ -16,6 +17,7 @@ const Login = () => {
             const user = userCredential.user;
             navigate("/")
             console.log(user);
+            trackLoginEvent(user);
         })
         .catch((error) => {
             const errorCode = error.code;

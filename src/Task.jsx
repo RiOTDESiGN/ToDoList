@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import Modal from './Modal';
-import ResizableTextarea from './ResizableTextarea';
+import React, { useState } from "react";
+import Modal from "./Modal";
+import ResizableTextarea from "./ResizableTextarea";
 
-const statuses = ['Planned', 'Ongoing', 'Done'];
+const statuses = ["Planned", "Ongoing", "Done"];
 
 const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -19,8 +18,8 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask }) => {
   };
 
   const formatTextWithLineBreaks = (text) => {
-    return text.split('\n').map((line) => (
-      <React.Fragment key={uuidv4()}>
+    return text.split("\n").map((line, index) => (
+      <React.Fragment key={index}>
         {line}
         <br />
       </React.Fragment>
@@ -44,20 +43,20 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask }) => {
         }}
       >
         <h2>Delete task ?</h2>
-        <p className='deletingTask'>"{taskObj.title}"</p>
+        <p className="deletingTask">"{taskObj.title}"</p>
       </Modal>
       <div className={`task ${taskObj.status}`}>
-      {isModalOpen && <div className="deletingOverlay"></div>}
-        <div className='taskText'>
+        {isModalOpen && <div className="deletingOverlay"></div>}
+        <div className="taskText">
           {isEditing ? (
-            <div className='editTask'>
-              <input 
-                className='editTaskTitle'
+            <div className="editTask">
+              <input
+                className="editTaskTitle"
                 value={editableTitle}
                 onChange={(e) => setEditableTitle(e.target.value)}
               />
-              <ResizableTextarea 
-                className='editTaskText'
+              <ResizableTextarea
+                className="editTaskText"
                 value={editableText}
                 onChange={(e) => setEditableText(e.target.value)}
                 editing={isEditing}
@@ -70,7 +69,7 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask }) => {
             </>
           )}
         </div>
-        <div className='taskDates'>
+        <div className="taskDates">
           <h4>{taskObj.dateCreated}</h4>
         </div>
         <div className="taskStatus">
@@ -85,9 +84,7 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask }) => {
                 onChange={() => updateTaskStatus(taskObj.id, status)}
                 className="statusRadio"
               />
-              <label htmlFor={`status-${status}-${taskObj.id}`}>
-                {status}
-              </label>
+              <label htmlFor={`status-${status}-${taskObj.id}`}>{status}</label>
             </div>
           ))}
         </div>

@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Handwritten";
-  src: url("./assets/Antro_Vectra_Bolder.otf") format("opentype");
+  src: url("./assets/AVB_Handwritten.otf") format("opentype");
 }
 
 @font-face {
@@ -18,7 +18,8 @@
   background-attachment: fixed;
   min-height: 100dvh;
 
-  font-family: Typewriter, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Typewriter, Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
   line-height: 1.5;
   font-size: 1rem;
   font-synthesis: none;
@@ -26,13 +27,25 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-  
+
   scroll-behavior: smooth;
 
   --border: 2px solid var(--border-color);
-  --planned-status-background: linear-gradient(to right, var(--task-background-color) 32%, var(--status-planned-color) 100%);
-  --ongoing-status-background: linear-gradient(to right, var(--task-background-color) 32%, var(--status-ongoing-color) 100%);
-  --done-status-background: linear-gradient(to right, var(--task-background-color) 32%, var(--status-done-color) 100%);
+  --planned-status-background: linear-gradient(
+    to right,
+    var(--task-background-color) 32%,
+    var(--status-planned-color) 100%
+  );
+  --ongoing-status-background: linear-gradient(
+    to right,
+    var(--task-background-color) 32%,
+    var(--status-ongoing-color) 100%
+  );
+  --done-status-background: linear-gradient(
+    to right,
+    var(--task-background-color) 32%,
+    var(--status-done-color) 100%
+  );
 }
 
 *,
@@ -83,7 +96,9 @@ form {
   border: var(--border);
 }
 
-input, textarea, button {
+input,
+textarea,
+button {
   border: none;
   color: var(--text-color);
   font-family: Typewriter;
@@ -109,7 +124,8 @@ textarea {
   background-color: var(--input-and-button-background-color);
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
   outline: none;
   background-color: var(--input-and-button-selected-color);
 }
@@ -165,18 +181,18 @@ h3 {
   color: transparent;
 }
 .subTitleFront {
-  background: linear-gradient(to right, 
-              var(--status-planned-color), 
-              var(--status-ongoing-color), 
-              var(--status-done-color));
+  background: linear-gradient(
+    to right,
+    var(--status-planned-color),
+    var(--status-ongoing-color),
+    var(--status-done-color)
+  );
   -webkit-background-clip: text;
   background-clip: text;
 }
 .subTitleShadow {
-  text-shadow: -1px 1px 0 #000, 
-                1px 1px 0 #000, 
-                1px -1px 0 #000, 
-                -1px -1px 10px #000;
+  text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000,
+    -1px -1px 10px #000;
 }
 
 ::placeholder {
@@ -184,7 +200,8 @@ h3 {
   opacity: 1; /* Firefox */
 }
 
-::-ms-input-placeholder { /* Edge 12 -18 */
+::-ms-input-placeholder {
+  /* Edge 12 -18 */
   color: var(--input-and-button-placeholder-color);
 }
 
@@ -209,8 +226,7 @@ h3 {
   display: grid;
   grid-template-columns: auto 170px 290px;
   grid-template-rows: 1fr;
-  grid-template-areas: 
-  "search theme sort";
+  grid-template-areas: "search theme sort";
   margin-top: 30px;
   border: var(--border);
   border-radius: 10px;
@@ -220,7 +236,7 @@ h3 {
   grid-area: search;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   line-height: 100px;
   font-size: 13px;
 }
@@ -272,16 +288,18 @@ p {
   grid-template-rows: 1fr 36px;
   gap: 27px;
   row-gap: 0px;
-  grid-template-areas: 
-  "text text date"
-  "status updated buttons";
+  grid-template-areas:
+    "text text date"
+    "status updated buttons";
   margin: 30px 0 0 0;
   padding: 20px 24px 20px 25px;
   user-select: none;
   border-radius: 10px;
 }
 
-.Planned, .Ongoing, .Done {
+.Planned,
+.Ongoing,
+.Done {
   border: var(--border);
 }
 .Planned {
@@ -334,7 +352,8 @@ p {
   background-color: var(--app-and-hover-background-color);
   font-family: Handwritten;
   border: var(--border);
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 
 .taskStatus {
@@ -355,7 +374,7 @@ p {
   position: absolute;
   top: 2px;
   left: -24px;
-  content: '';
+  content: "";
   display: block;
   width: 16px;
   height: 16px;
@@ -383,8 +402,8 @@ p {
   height: 26px;
   border: 1px solid var(--status-done-color);
   background: var(--status-done-color);
-  -webkit-mask: url('./assets/checkmark.png') center / contain no-repeat;
-          mask: url('./assets/checkmark.png') center / contain no-repeat;
+  -webkit-mask: url("./assets/checkmark.png") center / contain no-repeat;
+  mask: url("./assets/checkmark.png") center / contain no-repeat;
 }
 
 .updated {
@@ -497,8 +516,7 @@ p {
   .searchAndSort {
     grid-template-columns: auto 290px;
     grid-template-rows: 1fr;
-    grid-template-areas: 
-    "search sort";
+    grid-template-areas: "search sort";
   }
   .themeswitcher-container {
     display: none;
@@ -507,9 +525,30 @@ p {
 
 @media (max-width: 650px) {
   :root {
-    --planned-status-background: linear-gradient(to bottom, var(--status-planned-color) 143px, var(--border-color) 143px, var(--border-color) 145px, var(--task-background-color) 145px, var(--task-background-color) 100%);
-    --ongoing-status-background: linear-gradient(to bottom, var(--status-ongoing-color) 143px, var(--border-color) 143px, var(--border-color) 145px, var(--task-background-color) 145px, var(--task-background-color) 100%);
-    --done-status-background: linear-gradient(to bottom, var(--status-done-color) 143px, var(--border-color) 143px, var(--border-color) 145px, var(--task-background-color) 145px, var(--task-background-color) 100%);
+    --planned-status-background: linear-gradient(
+      to bottom,
+      var(--status-planned-color) 143px,
+      var(--border-color) 143px,
+      var(--border-color) 145px,
+      var(--task-background-color) 145px,
+      var(--task-background-color) 100%
+    );
+    --ongoing-status-background: linear-gradient(
+      to bottom,
+      var(--status-ongoing-color) 143px,
+      var(--border-color) 143px,
+      var(--border-color) 145px,
+      var(--task-background-color) 145px,
+      var(--task-background-color) 100%
+    );
+    --done-status-background: linear-gradient(
+      to bottom,
+      var(--status-done-color) 143px,
+      var(--border-color) 143px,
+      var(--border-color) 145px,
+      var(--task-background-color) 145px,
+      var(--task-background-color) 100%
+    );
   }
   body {
     margin: 20px auto;
@@ -518,7 +557,11 @@ p {
   form {
     padding: 20px;
   }
-  textarea, p, h3, .editTaskTitle, .taskStatus {
+  textarea,
+  p,
+  h3,
+  .editTaskTitle,
+  .taskStatus {
     text-align: center;
   }
   textarea {
@@ -531,11 +574,11 @@ p {
     grid-template-columns: 1fr;
     grid-template-rows: 123px 1fr 36px 36px;
     gap: 27px;
-    grid-template-areas: 
-    "date"
-    "text"
-    "status"
-    "buttons";
+    grid-template-areas:
+      "date"
+      "text"
+      "status"
+      "buttons";
     place-items: center;
     margin: 30px 0 0 0;
     padding: 20px 24px 20px 25px;
@@ -553,9 +596,9 @@ p {
   .searchAndSort {
     grid-template-columns: auto;
     grid-template-rows: 1fr 1fr;
-    grid-template-areas: 
-    "search"
-    "sort";
+    grid-template-areas:
+      "search"
+      "sort";
   }
   .searchfield {
     border-top-left-radius: 8px;

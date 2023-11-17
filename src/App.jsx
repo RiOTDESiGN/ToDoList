@@ -22,7 +22,7 @@ import SortSwitcher from "./SortSwitcher";
 
 import "./themes.css";
 import "./index.css";
-import "./assets/Antro_Vectra_Bolder.otf";
+import "./assets/AVB_Handwritten.otf";
 import "./assets/JMH_Typewriter.otf";
 
 const App = () => {

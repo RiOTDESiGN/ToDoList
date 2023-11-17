@@ -265,7 +265,7 @@ const App = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           {user && (
-            <div className="themeswitcher-container">
+            <div className="themeSwitcher-container">
               <ThemeSwitcher />
             </div>
           )}

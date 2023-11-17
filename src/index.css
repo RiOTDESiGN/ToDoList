@@ -240,11 +240,11 @@ h3 {
   line-height: 100px;
   font-size: 13px;
 }
-.themeswitcher {
+.themeSwitcher {
   width: 170px;
   grid-area: theme;
 }
-.sortswitcher {
+.sortSwitcher {
   display: grid;
   grid-template-columns: auto 60px 60px;
   grid-area: sort;

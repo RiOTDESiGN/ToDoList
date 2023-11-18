@@ -32,9 +32,10 @@ const App = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [resetKey, setResetKey] = useState(0); // Reset textarea height to default
   const [sortedTasks, setSortedTasks] = useState([]);
-  const navigate = useNavigate();
   const { resetTheme } = useTheme();
   const [user, setUser] = useState(null);
+
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     signOut(auth)

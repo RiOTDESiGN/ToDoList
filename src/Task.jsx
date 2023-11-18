@@ -74,7 +74,7 @@ const Task = ({ taskObj, updateTaskStatus, deleteTask, editTask }) => {
         </div>
         <div className="taskStatus">
           {statuses.map((status) => (
-            <div key={status}>
+            <div key={`${taskObj.id}-${status}`}>
               <input
                 id={`status-${status}-${taskObj.id}`}
                 type="radio"

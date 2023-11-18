@@ -1,10 +1,16 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from "react";
 
-const ResizableTextarea = ({ value, onChange, resetKey, editing, ...props }) => {
+const ResizableTextarea = ({
+  value,
+  onChange,
+  resetKey,
+  editing,
+  ...props
+}) => {
   const textareaRef = useRef(null);
 
   const resizeTextArea = () => {
-    textareaRef.current.style.height = 'auto';
+    textareaRef.current.style.height = "auto";
     textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
   };
 
@@ -12,9 +18,9 @@ const ResizableTextarea = ({ value, onChange, resetKey, editing, ...props }) => 
     const textArea = textareaRef.current;
     if (textArea) {
       resizeTextArea();
-      textArea.addEventListener('input', resizeTextArea);
+      textArea.addEventListener("input", resizeTextArea);
 
-      return () => textArea.removeEventListener('input', resizeTextArea);
+      return () => textArea.removeEventListener("input", resizeTextArea);
     }
   }, [value]);
 
@@ -25,12 +31,7 @@ const ResizableTextarea = ({ value, onChange, resetKey, editing, ...props }) => 
   }, [editing]);
 
   return (
-    <textarea
-      ref={textareaRef}
-      value={value}
-      onChange={onChange}
-      {...props}
-    />
+    <textarea ref={textareaRef} value={value} onChange={onChange} {...props} />
   );
 };
 

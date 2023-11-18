@@ -35,6 +35,7 @@ const App = () => {
   const navigate = useNavigate();
   const { resetTheme } = useTheme();
   const [user, setUser] = useState(null);
+
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
@@ -61,25 +62,29 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    if (!auth.currentUser) {
-      console.log("No user logged in");
-      return;
-    }
-
-    const userId = auth.currentUser.uid;
-    const tasksCollectionRef = collection(db, `users/${userId}/tasks`);
-
-    // Fetch tasks from Firestore
-    const unsubscribe = onSnapshot(tasksCollectionRef, (snapshot) => {
-      const loadedTasks = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setTasks(loadedTasks);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, fetch tasks
+        const userId = user.uid;
+        const tasksCollectionRef = collection(db, `users/${userId}/tasks`);
+        return onSnapshot(tasksCollectionRef, (snapshot) => {
+          const loadedTasks = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setTasks(loadedTasks);
+        });
+      } else {
+        // User is logged out, clear tasks
+        console.log("No user logged in");
+        setTasks([]);
+      }
     });
 
-    return () => unsubscribe();
-  }, [auth.currentUser]);
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   const generateTimestamp = () => {
     const datePart = new Date()
@@ -102,7 +107,9 @@ const App = () => {
     return `${dayName}\n${datePart}\n${timePart}`;
   };
 
-  const addTask = () => {
+  const addTask = (e) => {
+    e.preventDefault();
+
     if (task.title.trim() || task.text.trim()) {
       const newTask = {
         title: task.title.trim(),
@@ -112,24 +119,22 @@ const App = () => {
         dateUpdated: null,
       };
 
-      // Get the user ID
       const userId = auth.currentUser?.uid;
       if (!userId) {
         console.error("No authenticated user found");
         return;
       }
 
-      // Add the new task to the user's folder in the Firestore Database
       addDoc(collection(db, `users/${userId}/tasks`), newTask)
         .then((docRef) => {
           console.log("Document written with ID: ", docRef.id);
+          // Do not update the local tasks state here
         })
         .catch((error) => {
           console.error("Error adding document: ", error);
         });
 
-      // Update the local Task in the user's browser
-      setTasks((prevTasks) => [newTask, ...prevTasks]);
+      // Reset the task input fields
       setTask({ title: "", text: "", status: "Planned" });
       setResetKey((prevKey) => prevKey + 1);
     }
@@ -149,11 +154,6 @@ const App = () => {
       .catch((error) => {
         console.error("Error removing document: ", error);
       });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    addTask();
   };
 
   const handleInputChange = (e) => {
@@ -227,7 +227,7 @@ const App = () => {
             <div className="subTitle subTitleFront">Taskmanager</div>
           </div>
         </div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={addTask}>
           <div className="addTaskTitle">
             <input
               className={`createTaskTitle ${

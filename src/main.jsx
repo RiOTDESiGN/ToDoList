@@ -7,9 +7,9 @@ const savedTheme = localStorage.getItem("appTheme") || "default";
 document.documentElement.className = savedTheme;
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  // <React.StrictMode>
-  <ThemeProvider initialTheme={savedTheme}>
-    <AppRoutes />
-  </ThemeProvider>
-  // </React.StrictMode>
+  <React.StrictMode>
+    <ThemeProvider initialTheme={savedTheme}>
+      <AppRoutes />
+    </ThemeProvider>
+  </React.StrictMode>
 );

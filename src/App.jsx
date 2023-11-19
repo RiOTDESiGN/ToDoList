@@ -64,27 +64,27 @@ const App = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in, fetch tasks
-        const userId = user.uid;
-        const tasksCollectionRef = collection(db, `users/${userId}/tasks`);
-        return onSnapshot(tasksCollectionRef, (snapshot) => {
-          const loadedTasks = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-          setTasks(loadedTasks);
-        });
-      } else {
-        // User is logged out, clear tasks
-        console.log("No user logged in");
-        setTasks([]);
-      }
+      user ? fetchAndSetTasks(user) : clearTasks();
     });
 
-    return () => {
-      unsubscribe();
-    };
+    function fetchAndSetTasks(user) {
+      const userId = user.uid;
+      const tasksCollectionRef = collection(db, `users/${userId}/tasks`);
+      return onSnapshot(tasksCollectionRef, (snapshot) => {
+        const loadedTasks = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setTasks(loadedTasks);
+      });
+    }
+
+    function clearTasks() {
+      console.log("No user logged in");
+      setTasks([]);
+    }
+
+    return () => unsubscribe();
   }, []);
 
   const generateTimestamp = () => {

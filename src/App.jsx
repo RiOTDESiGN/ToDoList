@@ -30,7 +30,7 @@ const App = () => {
   const [tasks, setTasks] = useState([]);
   const [task, setTask] = useState({ title: "", text: "", status: "Planned" });
   const [searchQuery, setSearchQuery] = useState("");
-  const [resetKey, setResetKey] = useState(0); // Reset textarea height to default
+  const [resetTextareaHeight, setResetTextareaHeight] = useState(0); // Reset textarea height to default
   const [sortedTasks, setSortedTasks] = useState([]);
   const { resetTheme } = useTheme();
   const [user, setUser] = useState(null);
@@ -137,7 +137,7 @@ const App = () => {
 
       // Reset the task input fields
       setTask({ title: "", text: "", status: "Planned" });
-      setResetKey((prevKey) => prevKey + 1);
+      setResetTextareaHeight((prevKey) => prevKey + 1);
     }
   };
 
@@ -254,7 +254,7 @@ const App = () => {
             placeholder="..and write your task objectives here."
             value={task.text}
             onChange={handleInputChange}
-            resetKey={resetKey}
+            resetTextareaHeight={resetTextareaHeight}
           />
         </form>
         <div className="searchAndSort">

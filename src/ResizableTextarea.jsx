@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 const ResizableTextarea = ({
   value,
   onChange,
-  resetKey,
+  resetTextareaHeight,
   editing,
   ...props
 }) => {

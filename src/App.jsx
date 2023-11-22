@@ -12,7 +12,7 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import { db } from "./firebase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 
 import Signup from "./Signup";
 import Task from "./Task";
@@ -295,7 +295,10 @@ const App = () => {
       <br />
       <div className="test-firebase">
         {!user ? (
-          <Signup />
+          <>
+            <NavLink to="/login">Sign in</NavLink>
+            <Signup />
+          </>
         ) : (
           <div>
             <button onClick={handleLogout}>Logout</button>
